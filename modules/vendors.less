@@ -1,0 +1,378 @@
+//
+// !Vendors: declare vendors properties with std one
+// =================================================
+//
+//
+// You have two ways to declare std with vendors alternatives
+//
+// The best (and verbous) one:
+//  .vendors(property, ...)
+//
+// In case the property isn't know, the std property is defined
+// allowing futur (silent) deletion for obsolescence
+//
+// The quick one:
+// .property(...)
+//
+//
+// animation
+// background-size
+// border             -image(@value)
+// border-top         -image(@value)
+// border-right       -image(@value)
+// border-bottom      -image(@value)
+// border-left        -image(@value)
+// border-corner      -image(@value)
+// border-top-left    -image(@value)
+// border-top-right   -image(@value)
+// border-bottom-left -image(@value)
+// border-bottom-right-image(@value)
+// border-radius(@value)
+// border-top         -radius(@value)
+// border-right       -radius(@value)
+// border-bottom      -radius(@value)
+// border-left        -radius(@value)
+// border-top-left    -radius(@value)
+// border-top-right   -radius(@value)
+// border-bottom-left -radius(@value)
+// border-bottom-right-radius(@value)
+// box-shadow(@value)
+// box-sizing(@value)
+// column-count(@value)
+// column-gap(@value)
+// linear-gradient([@direction,] @from, @to)
+// tab-size(@value)
+// transform(@value)
+// transition(@value)
+//
+
+// !unknown or removed property
+.vendors(@property, @value)
+when not (@property = animation)
+ and not (@property = background-size)
+ and not (@property = border-image)
+ and not (@property = border-top-image)
+ and not (@property = border-right-image)
+ and not (@property = border-bottom-image)
+ and not (@property = border-left-image)
+ and not (@property = border-corner-image)
+ and not (@property = border-top-left-image)
+ and not (@property = border-top-right-image)
+ and not (@property = border-bottom-left-image)
+ and not (@property = border-bottom-right-image)
+ and not (@property = border-radius)
+ and not (@property = border-top-radius)
+ and not (@property = border-right-radius)
+ and not (@property = border-bottom-radius)
+ and not (@property = border-left-radius)
+ and not (@property = border-top-left-radius)
+ and not (@property = border-top-right-radius)
+ and not (@property = border-bottom-left-radius)
+ and not (@property = border-bottom-right-radius)
+ and not (@property = box-shadow)
+ and not (@property = box-sizing)
+ and not (@property = column-count)
+ and not (@property = column-gap)
+ and not (@property = linear-gradient)
+ and not (@property = tab-size)
+ and not (@property = transform)
+ and not (@property = transition) {
+  .PlastiCSS(print, '@{property}: @{value}');
+}
+
+// !animation
+.animation(@value) { .vendors(animation, @value) }
+.vendors(animation, @value) {
+  -webkit-animation: @value;
+     -moz-animation: @value;
+       -o-animation: @value;
+          animation: @value;
+}
+
+// !background-size
+.background-size(@value) { .vendors(background-size, @value) }
+.vendors(background-size, @value) {
+  -webkit-background-size: @value;
+          background-size: @value;
+}
+
+// !border-image
+.border-image(@value) { .vendors(border-image, @value) }
+.vendors(border-image, @value) {
+  -webkit-border-image: @value;
+     -moz-border-image: @value;
+       -o-border-image: @value;
+          border-image: @value;
+}
+
+.border-top-image(@value) { .vendors(border-top-image, @value) }
+.vendors(border-top-image, @value) {
+  -webkit-border-top-image: @value;
+     -moz-border-top-image: @value;
+       -o-border-top-image: @value;
+          border-top-image: @value;
+}
+
+.border-right-image(@value) { .vendors(border-right-image, @value) }
+.vendors(border-right-image, @value) {
+  -webkit-border-right-image: @value;
+     -moz-border-right-image: @value;
+       -o-border-right-image: @value;
+          border-right-image: @value;
+}
+
+.border-bottom-image(@value) { .vendors(border-bottom-image, @value) }
+.vendors(border-bottom-image, @value) {
+  -webkit-border-bottom-image: @value;
+     -moz-border-bottom-image: @value;
+       -o-border-bottom-image: @value;
+          border-bottom-image: @value;
+}
+
+.border-left-image(@value) { .vendors(border-left-image, @value) }
+.vendors(border-left-image, @value) {
+  -webkit-border-left-image: @value;
+     -moz-border-left-image: @value;
+       -o-border-left-image: @value;
+          border-left-image: @value;
+}
+
+.border-corner-image(@value) { .vendors(border-corner-image, @value) }
+.vendors(border-corner-image, @value) {
+  -webkit-border-corner-image: @value;
+     -moz-border-corner-image: @value;
+       -o-border-corner-image: @value;
+          border-corner-image: @value;
+}
+
+.border-top-left-image(@value) { .vendors(border-top-left-image, @value) }
+.vendors(border-top-left-image, @value) {
+  -webkit-border-top-left-image: @value;
+     -moz-border-top-left-image: @value;
+       -o-border-top-left-image: @value;
+          border-top-left-image: @value;
+}
+
+.border-top-right-image(@value) { .vendors(border-top-right-image, @value) }
+.vendors(border-top-right-image, @value) {
+  -webkit-border-top-right-image: @value;
+     -moz-border-top-right-image: @value;
+       -o-border-top-right-image: @value;
+          border-top-right-image: @value;
+}
+
+.border-bottom-left-image(@value) { .vendors(border-bottom-left-image, @value) }
+.vendors(border-bottom-left-image, @value) {
+  -webkit-border-bottom-left-image: @value;
+     -moz-border-bottom-left-image: @value;
+       -o-border-bottom-left-image: @value;
+          border-bottom-left-image: @value;
+}
+
+.border-bottom-right-image(@value) { .vendors(border-bottom-right-image, @value) }
+.vendors(border-bottom-right-image, @value) {
+  -webkit-border-bottom-right-image: @value;
+     -moz-border-bottom-right-image: @value;
+       -o-border-bottom-right-image: @value;
+          border-bottom-right-image: @value;
+}
+
+// !border-radius
+.border-radius(@value) { .vendors(border-radius, @value) }
+.vendors(border-radius, @value) {
+  -webkit-border-radius: @value;
+     -moz-border-radius: @value;
+          border-radius: @value;
+}
+.border-top-left-radius(@value) { .vendors(border-top-left-radius, @value) }
+.vendors(border-top-left-radius, @value) {
+  -webkit-border-top-left-radius: @value;
+     -moz-border-top-left-radius: @value;
+          border-top-left-radius: @value;
+}
+.border-top-right-radius(@value) { .vendors(border-top-right-radius, @value) }
+.vendors(border-top-right-radius, @value) {
+  -webkit-border-top-right-radius: @value;
+     -moz-border-top-right-radius: @value;
+          border-top-right-radius: @value;
+}
+.border-bottom-right-radius(@value) { .vendors(border-bottom-right-radius, @value) }
+.vendors(border-bottom-right-radius, @value) {
+  -webkit-border-bottom-right-radius: @value;
+     -moz-border-bottom-right-radius: @value;
+          border-bottom-right-radius: @value;
+}
+.border-bottom-left-radius(@value) { .vendors(border-bottom-left-radius, @value) }
+.vendors(border-bottom-left-radius, @value) {
+  -webkit-border-bottom-left-radius: @value;
+     -moz-border-bottom-left-radius: @value;
+          border-bottom-left-radius: @value;
+}
+.border-top-radius(@value) { .vendors(border-top-radius, @value) }
+.vendors(border-top-radius, @value) {
+  .border-top-left-radius(@value);
+  .border-top-right-radius(@value);
+}
+.border-right-radius(@value) { .vendors(border-right-radius, @value) }
+.vendors(border-right-radius, @value) {
+  .border-bottom-right-radius(@value);
+  .border-top-right-radius(@value);
+}
+.border-bottom-radius(@value) { .vendors(border-bottom-radius, @value) }
+.vendors(border-bottom-radius, @value) {
+  .border-bottom-left-radius(@value);
+  .border-bottom-right-radius(@value);
+}
+.border-left-radius(@value) { .vendors(border-left-radius, @value) }
+.vendors(border-left-radius, @value) {
+  .border-bottom-left-radius(@value);
+  .border-top-left-radius(@value);
+}
+
+// !box-shadow
+.box-shadow(@value) { .vendors(box-shadow, @value) }
+.vendors(box-shadow, @value) {
+  -webkit-box-shadow: @value;
+     -moz-box-shadow: @value;
+          box-shadow: @value;
+}
+
+// !box-sizing
+.box-sizing(@value) { .vendors(box-sizing, @value) }
+.vendors(box-sizing, @value) {
+  -webkit-box-sizing: @value;
+     -moz-box-sizing: @value;
+          box-sizing: @value;
+}
+
+// !column-count
+.column-count(@value) { .vendors(column-count, @value) }
+.vendors(column-count, @value) {
+  -webkit-column-count: @value;
+     -moz-column-count: @value;
+          column-count: @value;
+}
+
+// !column-gap
+.column-gap(@value) { .vendors(column-gap, @value) }
+.vendors(column-gap, @value) {
+  -webkit-column-gap: @value;
+     -moz-column-gap: @value;
+          column-gap: @value;
+}
+
+// !display()
+.display(@value) { .vendors(display, @value) }
+.vendors(display, @value) {
+  display: @value;
+}
+.display(inline-block) { .vendors(display, inline-block) }
+.vendors(display, inline-block) {
+  display: -moz-inline-box;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+// !linear-gradient
+.linear-gradient(@from, @to) { .vendors(linear-gradient, @from, @to) }
+.linear-gradient(@direction, @from, @to) { .vendors(linear-gradient, @direction, @from, @to) }
+
+.vendors(_private, linear-gradient, @from, @to, @a, @b, @c, @d) {
+  background-image: -webkit-gradient(linear, @a, @b, color-stop(0%,@from), color-stop(100%, @to));
+  background-image: -webkit-linear-gradient(@c, @from 0%, @to 100%);
+  background-image:    -moz-linear-gradient(@c, @from 0%, @to 100%);
+  background-image:     -ms-linear-gradient(@c, @from 0%, @to 100%);
+  background-image:      -o-linear-gradient(@c, @from 0%, @to 100%);
+  background-image:         linear-gradient(@d, @from 0%, @to 100%);
+}
+.vendors(linear-gradient, @from, @to) {
+  .vendors(linear-gradient, bottom, @from, @to);
+}
+.vendors(linear-gradient, bottom, @from, @to) {
+  .vendors(_private, linear-gradient, @from, @to, left top, left bottom, top, to bottom);
+}
+.vendors(linear-gradient, right, @from, @to) {
+  .vendors(_private, linear-gradient, @from, @to, left top, right top, left, to right);
+}
+.vendors(linear-gradient, bottom-right, @from, @to) {
+  .vendors(_private, linear-gradient, @from, @to, left top, right bottom, -45deg, 135deg);
+}
+.vendors(linear-gradient, top-right, @from, @to) {
+  .vendors(_private, linear-gradient, @from, @to, left bottom, right top, 45deg, 45deg);
+}
+.vendors(linear-gradient, top-left, @from, @to) {
+  .vendors(linear-gradient, bottom-right, @to, @from);
+}
+.vendors(linear-gradient, bottom-left, @from, @to) {
+  .vendors(linear-gradient, top-right, @to, @from);
+}
+.vendors(linear-gradient, left, @from, @to) {
+  .vendors(linear-gradient, right, @to, @from);
+}
+.vendors(linear-gradient, top, @from, @to) {
+  .vendors(linear-gradient, bottom, @to, @from);
+}
+
+// !tab-size
+.tab-size(@value) { .vendors(tab-size, @value) }
+.vendors(tab-size, @value) {
+  -moz-tab-size: @value;
+    -o-tab-size: @value;
+       tab-size: @value;
+}
+
+// !transform
+.transform(@value) { .vendors(transform, @value) }
+.vendors(transform, @value) {
+  -webkit-transform: @value;
+     -moz-transform: @value;
+      -ms-transform: @value;
+       -o-transform: @value;
+          transform: @value;
+}
+.transform-origin(@value) { .vendors(transform-origin, @value) }
+.vendors(transform-origin, @value) {
+  -webkit-transform-origin: @value;
+     -moz-transform-origin: @value;
+      -ms-transform-origin: @value;
+       -o-transform-origin: @value;
+          transform-origin: @value;
+}
+
+// !transition
+.transition(@value) { .vendors(transition, @value) }
+.vendors(transition, @value) {
+  -webkit-transition: @value;
+     -moz-transition: @value;
+       -o-transition: @value;
+          transition: @value;
+}
+.transition-delay(@value) { .vendors(transition-delay, @value) }
+.vendors(transition-delay, @value) {
+  -webkit-transition-delay: @value;
+     -moz-transition-delay: @value;
+       -o-transition-delay: @value;
+          transition-delay: @value;
+}
+.transition-duration(@value) { .vendors(transition-duration, @value) }
+.vendors(transition-duration, @value) {
+  -webkit-transition-duration: @value;
+     -moz-transition-duration: @value;
+       -o-transition-duration: @value;
+          transition-duration: @value;
+}
+.transition-property(@value) { .vendors(transition-property, @value) }
+.vendors(transition-property, @value) {
+  -webkit-transition-property: @value;
+     -moz-transition-property: @value;
+       -o-transition-property: @value;
+          transition-property: @value;
+}
+.transition-timing-function(@value) { .vendors(transition-timing-function, @value) }
+.vendors(transition-timing-function, @value) {
+  -webkit-transition-timing-function: @value;
+     -moz-transition-timing-function: @value;
+       -o-transition-timing-function: @value;
+          transition-timing-function: @value;
+}

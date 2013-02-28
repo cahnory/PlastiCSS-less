@@ -1,0 +1,12 @@
+//
+// !Fix: bug fixes
+// ===============
+//
+
+.fix() {
+  .fix(adjacent);
+}
+.fix(adjacent) {
+  @-webkit-keyframes adjacentSelectorWebkitBugFix { from { display: block } to { display: block } }
+  body { -webkit-animation: adjacentSelectorWebkitBugFix infinite 1s; }
+}

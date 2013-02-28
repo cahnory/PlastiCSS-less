@@ -1,0 +1,69 @@
+//
+// !Helpers: provide common "behaviors"
+// ====================================
+//
+
+// !clear(@clear: both) — Apply on floats parent
+.clear(@clear: both) {
+  & { *zoom: 1 }
+  &:after {
+    clear: @clear;
+    content: @nbsp;
+    display: block;
+    height: 0;
+  }
+}
+
+// !margin-collapse([bottom|top])
+.margin-collapse() {
+  .margin-collapse(bottom);
+  .margin-collapse(top);
+}
+.margin-collapse(top) {
+  padding-top: 0.05px;
+}
+.margin-collapse(bottom) {
+  padding-bottom: 0.05px;
+}
+
+// !oust() — OutSight
+.oust() {
+  border: none;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.oust(text) {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+// !define px and rem value for a given property
+.rem(@property, @value, @html: 10) when not (ispixel(@value)) {
+  @px: round(0px + @value * @html);
+  .PlastiCSS(print, "@{property}: @{px}; @{property}: @{value}");
+}
+.rem(@property, @value, @html: 10) when (ispixel(@value)) {
+  @rem: 0rem + @value / @html;
+  .PlastiCSS(print, "@{property}: @{value}; @{property}: @{rem}");
+}
+
+// !scroll([x|y:y,] @other: auto)
+.scroll(@x: auto) when not (@x = x) and not(@x = y) {
+  .scroll(y, @x);
+}
+.scroll(x, @y: auto) {
+  overflow-x: scroll;
+  overflow-y: @y;
+  overflow: -moz-scrollbars-horizontal;
+}
+.scroll(y, @x: auto) {
+  overflow-x: @x;
+  overflow-y: scroll;
+  overflow: -moz-scrollbars-vertical;
+}

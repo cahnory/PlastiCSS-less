@@ -1,0 +1,49 @@
+//
+// !Font: Define a vertical rhythm
+// ===============================
+//
+
+// !"Constants"
+@flow-top:    1;
+@flow-bottom: 2;
+@flow-middle: 3;
+@flow-both:   4;
+
+// !Std vars
+@flow-line-height: 15px;
+@flow-precision: 1000;
+@flow-margin: @flow-both;
+
+.flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) {
+  @line-height: unit(@base-line-height / @font-size);
+  @coef: ceil(1 / @line-height);
+
+  font-size: @font-size;
+  font-size: 1rem * (@font-size / 10);
+  line-height: round(@line-height * @coef * @precision) / @precision;
+}
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision){
+  .flow(_private, @font-size, @base-line-height, @margin, @precision);
+}
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-top) {
+  margin-bottom: 0;
+  margin-top: @base-line-height;
+  margin-top: .1rem * @base-line-height;
+}
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-bottom) {
+  margin-bottom: @base-line-height;
+  margin-bottom: .1rem * @base-line-height;
+  margin-top: 0;
+}
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-both) {
+  margin-top: 2 * @base-line-height;
+  margin-top: .2rem * @base-line-height;
+  margin-bottom: @base-line-height;
+  margin-bottom: .1rem * @base-line-height;
+}
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-middle) {
+  margin-top: @base-line-height;
+  margin-top: .1rem * @base-line-height;
+  margin-bottom: @base-line-height;
+  margin-bottom: .1rem * @base-line-height;
+}

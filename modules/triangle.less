@@ -1,0 +1,28 @@
+//
+// !Triangles: change an element to a triangle
+// ===========================================
+//
+@triangle-std-width: .5em;
+@triangle-std-color: #FFF;
+@triangle-std-dir: bottom;
+
+.triangle(@dir: @triangle-std-dir, @width: @triangle-std-width, @color: @triangle-std-color) {
+  .triangle(private, @dir, @width, @color);
+}
+.triangle(private, @_, @width, ...) {
+  border: @width transparent solid;
+  height: 0;
+  width: 0;
+}
+.triangle(private, bottom, @width: @triangle-std-width, @color: @triangle-std-color) {
+  border-top-color: @color;
+}
+.triangle(private, left,   @width: @triangle-std-width, @color: @triangle-std-color) {
+  border-right-color: @color;
+}
+.triangle(private, right,  @width: @triangle-std-width, @color: @triangle-std-color) {
+  border-left-color: @color;
+}
+.triangle(private, top,    @width: @triangle-std-width, @color: @triangle-std-color) {
+  border-bottom-color: @color;
+}
