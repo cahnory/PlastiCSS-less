@@ -40,6 +40,7 @@
 // box-sizing(@value)
 // column-count(@value)
 // column-gap(@value)
+// display(@value)
 // linear-gradient([@direction,] @from, @to)
 // tab-size(@value)
 // transform(@value)
@@ -73,6 +74,7 @@ when not (@property = animation)
  and not (@property = box-sizing)
  and not (@property = column-count)
  and not (@property = column-gap)
+ and not (@property = display)
  and not (@property = linear-gradient)
  and not (@property = tab-size)
  and not (@property = transform)
@@ -263,10 +265,9 @@ when not (@property = animation)
 
 // !display()
 .display(@value) { .vendors(display, @value) }
-.vendors(display, @value) {
-  display: @value;
+.vendors(display) {
+  display: @rest;
 }
-.display(inline-block) { .vendors(display, inline-block) }
 .vendors(display, inline-block) {
   display: -moz-inline-box;
   display: inline-block;
