@@ -42,6 +42,7 @@
 // column-gap(@value)
 // display(@value)
 // linear-gradient([@direction,] @from, @to)
+// min-height(@value)
 // tab-size(@value)
 // transform(@value)
 // transition(@value)
@@ -76,6 +77,7 @@ when not (@property = animation)
  and not (@property = column-gap)
  and not (@property = display)
  and not (@property = linear-gradient)
+ and not (@property = min-height)
  and not (@property = tab-size)
  and not (@property = transform)
  and not (@property = transition) {
@@ -313,6 +315,13 @@ when not (@property = animation)
 }
 .vendors(linear-gradient, top, @from, @to) {
   .vendors(linear-gradient, bottom, @to, @from);
+}
+
+// !min-height
+.min-height(@value) { .vendors(min-height, @value) }
+.vendors(min-height, @value) {
+  min-height: @value;
+     _height: @value;
 }
 
 // !tab-size
