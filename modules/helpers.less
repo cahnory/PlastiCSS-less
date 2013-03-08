@@ -20,10 +20,18 @@
   .margin-collapse(top);
 }
 .margin-collapse(top) {
-  padding-top: 0.05px;
+  &:before {
+    content: @nbsp;
+    display: block;
+    height: 0;
+  }
 }
 .margin-collapse(bottom) {
-  padding-bottom: 0.05px;
+  &:after {
+    content: @nbsp;
+    display: block;
+    height: 0;
+  }
 }
 
 // !oust() — OutSight
