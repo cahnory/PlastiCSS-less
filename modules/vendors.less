@@ -265,7 +265,7 @@ when not (@property = animation)
           column-gap: @value;
 }
 
-// !display()
+// !display
 .display(@value) { .vendors(display, @value) }
 .vendors(display) {
   display: @rest;
@@ -275,6 +275,60 @@ when not (@property = animation)
   display: inline-block;
   *display: inline;
   *zoom: 1;
+}
+
+// !Hyphens
+.hyphens(@value) { .vendors(hyphens, @value) }
+.vendors(hyphens, @value) {
+  -webkit-hyphens: @value;
+     -moz-hyphens: @value;
+      -ms-hyphens: @value;
+          hyphens: @value;
+}
+
+// !Hyphenate-character
+.hyphenate-character(@value) { .vendors(hyphenate-character, @value) }
+.vendors(hyphenate-character, @value) {
+  -webkit-hyphenate-character: @value;
+     -moz-hyphenate-character: @value;
+      -ms-hyphenate-character: @value;
+          hyphenate-character: @value;
+}
+
+// !Hyphenate-limit-chars
+.hyphenate-limit-chars(@value) { .vendors(hyphenate-limit-chars, @value) }
+.vendors(hyphenate-limit-chars, @value) {
+  -webkit-hyphenate-limit-chars: @value;
+     -moz-hyphenate-limit-chars: @value;
+      -ms-hyphenate-limit-chars: @value;
+          hyphenate-limit-chars: @value;
+}
+
+// !Hyphenate-limit-lines
+.hyphenate-limit-last(@value) { .vendors(hyphenate-limit-last, @value) }
+.vendors(hyphenate-limit-last, @value) {
+  -webkit-hyphenate-limit-last: @value;
+     -moz-hyphenate-limit-last: @value;
+      -ms-hyphenate-limit-last: @value;
+          hyphenate-limit-last: @value;
+}
+
+// !Hyphenate-limit-lines
+.hyphenate-limit-lines(@value) { .vendors(hyphenate-limit-lines, @value) }
+.vendors(hyphenate-limit-lines, @value) {
+  -webkit-hyphenate-limit-lines: @value;
+     -moz-hyphenate-limit-lines: @value;
+      -ms-hyphenate-limit-lines: @value;
+          hyphenate-limit-lines: @value;
+}
+
+// !Hyphenate-limit-zone
+.hyphenate-limit-zone(@value) { .vendors(hyphenate-limit-zone, @value) }
+.vendors(hyphenate-limit-zone, @value) {
+  -webkit-hyphenate-limit-zone: @value;
+     -moz-hyphenate-limit-zone: @value;
+      -ms-hyphenate-limit-zone: @value;
+          hyphenate-limit-zone: @value;
 }
 
 // !linear-gradient
