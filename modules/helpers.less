@@ -8,7 +8,7 @@
   & { *zoom: 1 }
   &:after {
     clear: @clear;
-    content: @nbsp;
+    content: @utf-nbsp;
     display: block;
     height: 0;
   }
@@ -21,14 +21,14 @@
 }
 .margin-collapse(top) {
   &:before {
-    content: @nbsp;
+    content: @utf-nbsp;
     display: block;
     height: 0;
   }
 }
 .margin-collapse(bottom) {
   &:after {
-    content: @nbsp;
+    content: @utf-nbsp;
     display: block;
     height: 0;
   }
