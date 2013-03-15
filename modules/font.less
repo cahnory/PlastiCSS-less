@@ -44,3 +44,26 @@
   ,serif;
   
 @font-serif: @font-arial;
+
+.font-face(@family, @file, @idSvg, @weight: normal, @style: normal, @param: '') {
+  @font-face {
+    font-family: @family;
+    src: url('@{file}.eot?@{param}');
+    src: url('@{file}.eot?#iefix&@{param}') format('embedded-opentype'),
+         url('@{file}.woff?@{param}') format('woff'),
+         url('@{file}.ttf?@{param}') format('truetype'),
+         url('@{file}.svg#@{idSvg}') format('svg');
+    font-weight: @weight;
+    font-style: @style;
+  }
+}
+.font-face(@package) {
+  @family: '@{package}-family';
+  @file:   '@{package}-file';
+  @idSvg:  '@{package}-idSvg';
+  @weight: '@{package}-weight';
+  @style:  '@{package}-style';
+  @param:  '@{package}-param';
+
+  .font-face(@@family, @@file, @@idSvg, @@weight, @@style, @@param);
+}
