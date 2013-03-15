@@ -90,16 +90,6 @@
   width: @width;
 }
 
-// !define px and rem value for a given property
-.rem(@property, @value, @html: 10) when not (ispixel(@value)) {
-  @px: round(0px + @value * @html);
-  .PlastiCSS(print, "@{property}: @{px}; @{property}: @{value}");
-}
-.rem(@property, @value, @html: 10) when (ispixel(@value)) {
-  @rem: 0rem + @value / @html;
-  .PlastiCSS(print, "@{property}: @{value}; @{property}: @{rem}");
-}
-
 // !scroll([x|y:y,] @other: auto)
 .scroll(@x: auto) when not (@x = x) and not(@x = y) {
   .scroll(y, @x);
