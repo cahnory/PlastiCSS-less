@@ -49,6 +49,7 @@
 // hyphenate-limit-zone(@value)
 // linear-gradient([@direction,] @from, @to)
 // min-height(@value)
+// opacity(@value)
 // tab-size(@value)
 // transform(@value)
 // transition(@value)
@@ -90,6 +91,7 @@ when not (@property = animation)
  and not (@property = hyphenate-limit-zone)
  and not (@property = linear-gradient)
  and not (@property = min-height)
+ and not (@property = opacity)
  and not (@property = tab-size)
  and not (@property = transform)
  and not (@property = transition) {
@@ -388,6 +390,13 @@ when not (@property = animation)
 .vendor(min-height, @value) {
   min-height: @value;
      _height: @value;
+}
+.opacity(@value) { .vendor(opacity, @value) }
+.vendor(opacity, @value) {
+  @percent: @value * 100;
+  opacity: @value;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{percent})";
+  filter: ~'alpha(opacity=@{percent})';
 }
 
 // !tab-size
