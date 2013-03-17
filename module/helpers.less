@@ -51,33 +51,79 @@
   white-space: nowrap;
 }
 
-// Absolute position an element
-.position(@rest,...) {
+// Absolute position an element by top, right, bottom and left
+.pin(@rest,...) {
   position: absolute;
 }
-.position(@pos) {
+.pin(@pos) {
   top: @pos;
   right: @pos;
   bottom: @pos;
   left: @pos;
 }
-.position(@y, @x) {
+.pin(@y, @x) {
   top: @y;
   right: @x;
   bottom: @y;
   left: @x;
 }
-.position(@top, @right, @bottom) {
+.pin(@top, @right, @bottom) {
   top: @top;
   right: @right;
   bottom: @bottom;
   left: @right;
 }
-.position(@top, @right, @bottom, @left) {
+.pin(@top, @right, @bottom, @left) {
   top: @top;
   right: @right;
   bottom: @bottom;
   left: @left;
+}
+
+// Absolute position an element by left or right and top or bottom
+.pos(@rest,...) {
+  position: absolute;
+}
+.pos(@pos) {
+  .pos(@pos, @pos, top left);
+}
+.pos(@x, @y) {
+  .pos(@x, @y, top left);
+}
+.pos(@x, @y, @pos) when not (@pos = right) and not (@pos = ~'right top') and not (@pos = ~'right bottom') and not (@pos = ~'top right') and not (@pos = ~'bottom right') {
+  left: @x;
+}
+.pos(@x, @y, @pos) when (@pos = right), (@pos = ~'right top'), (@pos = ~'right bottom'), (@pos = ~'top right'), (@pos = ~'bottom right') {
+  right: @x;
+}
+.pos(@x, @y, @pos) when not (@pos = bottom) and not (@pos = ~'bottom left') and not (@pos = ~'bottom right') and not (@pos = ~'left bottom') and not (@pos = ~'right bottom') {
+  top: @y;
+}
+.pos(@x, @y, @pos) when (@pos = bottom), (@pos = ~'bottom left'), (@pos = ~'bottom right'), (@pos = ~'left bottom'), (@pos = ~'right bottom') {
+  bottom: @y;
+}
+
+// Relative position an element by left or right and top or bottom
+.move(@rest,...) {
+  position: relative;
+}
+.move(@pos) {
+  .move(@pos, @pos, top left)
+}
+.move(@x, @y) {
+  .move(@x, @y, top left)
+}
+.move(@x, @y, @pos) when not (@pos = right) and not (@pos = ~'right top') and not (@pos = ~'right bottom') and not (@pos = ~'top right') and not (@pos = ~'bottom right') {
+  left: @x;
+}
+.move(@x, @y, @pos) when (@pos = right), (@pos = ~'right top'), (@pos = ~'right bottom'), (@pos = ~'top right'), (@pos = ~'bottom right') {
+  right: @x;
+}
+.move(@x, @y, @pos) when not (@pos = bottom) and not (@pos = ~'bottom left') and not (@pos = ~'bottom right') and not (@pos = ~'left bottom') and not (@pos = ~'right bottom') {
+  top: @y;
+}
+.move(@x, @y, @pos) when (@pos = bottom), (@pos = ~'bottom left'), (@pos = ~'bottom right'), (@pos = ~'left bottom'), (@pos = ~'right bottom') {
+  bottom: @y;
 }
 
 // Set size of an element
