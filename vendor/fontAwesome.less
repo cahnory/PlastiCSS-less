@@ -1,14 +1,18 @@
-.fontAwesome(@family: 'FontAwesome', @weight: normal, @style: normal, @version: '3.0.1') {
-  @font-face {
-    font-family: @family;
-    src: url('../font/fontawesome-webfont.eot?v=@{version}');
-    src: url('../font/fontawesome-webfont.eot?#iefix&v=@{version}') format('embedded-opentype'),
-         url('../font/fontawesome-webfont.woff?v=@{version}') format('woff'),
-         url('../font/fontawesome-webfont.ttf?v=@{version}') format('truetype');
-    font-weight: @weight;
-    font-style: @style;
-  }
-}
+// !Credits
+@fontAwesome-credits:     'Font Awesome by Dave Gandy - http://fortawesome.github.com/Font-Awesome';
+
+// !Package
+@fontAwesome-cfg-family:  'FontAwesome';
+@fontAwesome-cfg-version: '3.0.1';
+@fontAwesome-cfg-file:    '@{cfg-dir-font}fontawesome-webfont';
+@fontAwesome-cfg-idSvg:   'fontawesomeregular';
+@fontAwesome-cfg-param:   'v=@{fontAwesome-cfg-version}';
+@fontAwesome-cfg-weight:  normal;
+@fontAwesome-cfg-style:   normal;
+
+@fontAwesome-font-face:   'fontAwesome-cfg';
+
+// !Icon characters
 @fontAwesome-glass:                '\f000';
 @fontAwesome-music:                '\f001';
 @fontAwesome-search:               '\f002';
