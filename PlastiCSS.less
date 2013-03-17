@@ -3,12 +3,17 @@
 // ==========
 //
 
-// !Add PlastiCSS credits
-.PlastiCSS() {
-  /* Made with PlastiCSS (https://github.com/cahnory/PlastiCSS/) */
-}
-
 // !Print string as properties
 .PlastiCSS(print, @string) {
   -plasticss:~"0;@{string}"
+}
+
+// !Add credits in css as a property value
+.PlastiCSS(credit) {
+  -thanks-to: "PlastiCSS by François Germain - https://github.com/cahnory/PlastiCSS/";
+}
+.PlastiCSS(credit, @name) {
+  @creditVar: ~'@{name}-credits';
+  @credit: @@creditVar;
+  -thanks-to: ~"'@{credit}'"
 }
