@@ -395,7 +395,7 @@ when not (@property = animation)
 .vendor(opacity, @value) {
   @percent: @value * 100;
   opacity: @value;
-  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{percent})";
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@{percent})';
   filter: ~'alpha(opacity=@{percent})';
 }
 

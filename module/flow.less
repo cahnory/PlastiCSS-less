@@ -18,34 +18,34 @@
 
 
 // !Flow
-.flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) {
+.flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) {
   @line-height: unit(@base-line-height / @font-size);
   @coef: ceil(1 / @line-height);
 
   font-size: @font-size;
   font-size: 1rem * (@font-size / 10);
-  line-height: round(@line-height * @coef * @precision) / @precision;
+  line-height: round(@line-height * @coef, @cfg-decimal);
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision){
-  .flow(_private, @font-size, @base-line-height, @margin, @precision);
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin){
+  .flow(_private, @font-size, @base-line-height, @margin);
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-top) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-top) {
   margin-bottom: 0;
   margin-top: @base-line-height;
   margin-top: .1rem * @base-line-height;
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-bottom) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-bottom) {
   margin-bottom: @base-line-height;
   margin-bottom: .1rem * @base-line-height;
   margin-top: 0;
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-both) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-both) {
   margin-top: 2 * @base-line-height;
   margin-top: .2rem * @base-line-height;
   margin-bottom: @base-line-height;
   margin-bottom: .1rem * @base-line-height;
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin, @precision: @flow-precision) when (@margin = @flow-middle) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-middle) {
   margin-top: @base-line-height;
   margin-top: .1rem * @base-line-height;
   margin-bottom: @base-line-height;
@@ -59,15 +59,14 @@
   @line-height,
   @margin: @flow-margin,
   @multiply: @flow-limit,
-  @ease: linear,
-  @precision: @flow-precision
+  @ease: linear
 ) {
-  &1 { .flow-ease(@font-size, @line-height, @margin, @multiply, 1, 6, @ease, @precision) }
-  &2 { .flow-ease(@font-size, @line-height, @margin, @multiply, 2, 6, @ease, @precision) }
-  &3 { .flow-ease(@font-size, @line-height, @margin, @multiply, 3, 6, @ease, @precision) }
-  &4 { .flow-ease(@font-size, @line-height, @margin, @multiply, 4, 6, @ease, @precision) }
-  &5 { .flow-ease(@font-size, @line-height, @margin, @multiply, 5, 6, @ease, @precision) }
-  &6 { .flow-ease(@font-size, @line-height, @margin, @multiply, 6, 6, @ease, @precision) }
+  &1 { .flow-ease(@font-size, @line-height, @margin, @multiply, 1, 6, @ease) }
+  &2 { .flow-ease(@font-size, @line-height, @margin, @multiply, 2, 6, @ease) }
+  &3 { .flow-ease(@font-size, @line-height, @margin, @multiply, 3, 6, @ease) }
+  &4 { .flow-ease(@font-size, @line-height, @margin, @multiply, 4, 6, @ease) }
+  &5 { .flow-ease(@font-size, @line-height, @margin, @multiply, 5, 6, @ease) }
+  &6 { .flow-ease(@font-size, @line-height, @margin, @multiply, 6, 6, @ease) }
 }
 
 // t: current time, b: begInnIng value, c: change In value, d: duration
@@ -78,66 +77,65 @@
   @multiply: @flow-limit,
   @t: 1,
   @d: 6,
-  @ease: linear,
-  @precision: @flow-precision
+  @ease: linear
 ) {
   .flow-ease(_private,
-    @font-size * @line-height, @margin, @precision,
+    @font-size * @line-height, @margin,
     @font-size * @multiply,
     @font-size - @font-size * @multiply,
     @t - 1, @d, @ease);
 }
 
 // !flow-ease: linear
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, linear) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, linear) {
   @font-size: round(@c * @t/@d + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeInQuad
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeInQuad) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInQuad) {
   @font-size: round(@c * (@t/@d) * (@t/@d) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeOutQuad
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeOutQuad) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutQuad) {
   @font-size: round(-@c * (@t/@d) * (@t/@d - 2) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeInCubic
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeInCubic) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInCubic) {
   @font-size: round(@c * (@t/@d) * (@t/@d) * (@t/@d) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeOutCubic
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeOutCubic) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutCubic) {
   @font-size: round(@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) + 1) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeInQuart
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeInQuart) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInQuart) {
   @font-size: round(@c * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeOutQuart
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeOutQuart) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutQuart) {
   @font-size: round(-@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) - 1) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeInQuint
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeInQuint) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInQuint) {
   @font-size: round(@c * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
 
 // !flow-ease: easeOutQuint
-.flow-ease(_private, @line-height, @margin, @precision, @b, @c, @t, @d, easeOutQuint) {
+.flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutQuint) {
   @font-size: round(@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) + 1) + @b);
-  .flow(@font-size, @line-height, @margin, @precision);
+  .flow(@font-size, @line-height, @margin);
 }
