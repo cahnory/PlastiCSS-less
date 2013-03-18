@@ -1,6 +1,49 @@
 //
 // !Column: Define columns set of any size up to 32
-// ===============================
+// ================================================
+//
+// Usage:
+// ******
+//  .column {
+//    .column(4);
+//  }
+//
+// Output:
+// *******
+//  .column {
+//    float: left;
+//    width: 25%;
+//    -webkit-box-sizing: border-box;
+//    -moz-box-sizing: border-box;
+//    box-sizing: border-box;
+//  }
+//  .column-set {
+//    *zoom: 1;
+//  }
+//  .column-set:after {
+//    clear: left;
+//    content: '\00A0';
+//    display: block;
+//    height: 0;
+//  }
+//  .column.span-2 {
+//    width: 50%;
+//  }
+//  .column.jump-1 {
+//    margin-left: 25%;
+//  }
+//  .column.span-3 {
+//    width: 75%;
+//  }
+//  .column.jump-2 {
+//    margin-left: 50%;
+//  }
+//  .column.span-4 {
+//    width: 100%;
+//  }
+//  .column.jump-3 {
+//    margin-left: 75%;
+//  }
 //
 
 @column-cfg-set:  '-set';
@@ -9,11 +52,11 @@
 
 .column(_private, @size, @index, @span, @jump) {
   @indexJump: @index - 1;
-  @spanClass: ~'@{span}@{index}';
-  @jumpClass: ~'@{span}@{indexJump}';
+  @spanSelector: ~'@{span}@{index}';
+  @jumpSelector: ~'@{jump}@{indexJump}';
 
-  &@{spanClass} { width: round(100% / @size * @index, @cfg-decimal-percent) }
-  &@{jumpClass} { margin-left: round(100% / @size * (@index - 1), @cfg-decimal-percent) }
+  &@{spanSelector} { width: round(100% / @size * @index, @cfg-decimal-percent) }
+  &@{jumpSelector} { margin-left: round(100% / @size * (@index - 1), @cfg-decimal-percent) }
 }
 .column(
   @size,
@@ -25,7 +68,8 @@
   width: round(100% / @size, @cfg-decimal-percent);
   .vendor(box-sizing, border-box);
 
-  &@{set} {
+  @setSelector: ~'@{set}';
+  &@{setSelector} {
     .clear(left);
   }
 }
