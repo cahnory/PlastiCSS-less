@@ -1,0 +1,45 @@
+//
+// !Media: Provides ready to use media queries
+// ===========================================
+//
+// Usage:
+// ******
+//  @media @media-lt-normal {
+//    /* CSS */
+//  }
+//
+// Output:
+// *******
+//  @media (max-width: 1023px) {
+//    /* CSS */
+//  }
+//
+@media-large-min:  @cfg-media-large;
+@media-medium-min: @cfg-media-medium;
+@media-medium-max: @cfg-media-large-min - 1;
+@media-small-max:  @cfg-media-medium-min - 1;
+
+// == Normal
+@media-normal:     ~'(min-width: @{media-large-min})';
+
+// <= Normal (all media only if media queries are supported)
+@media-lte-normal: ~'(min-width: 0px)';
+
+// <  Normal
+@media-lt-normal:  ~'(max-width: @{media-medium-max})';
+
+// == Medium
+@media-medium:     ~'(min-width: @{media-medium-min}) and (max-width: @{media-medium-max})';
+
+// <= Medium
+@media-lte-medium: ~'(max-width: @{media-medium-max})';
+
+// <  Medium
+@media-lte-medium: ~'(max-width: @{media-small-max})';
+
+// <  Medium, == Small
+@media-lt-medium:  ~'(max-width: @{media-small-max})';
+@media-small:      @cfg-lt-medium;
+
+// Retina (picked from: KNACSS by Raphaël Goetter - http://knacss.com)
+@media-retina:     ~'(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)';
