@@ -16,7 +16,7 @@
 @cfg-font-flow:  @flow-both;
 
 // !Flow
-.flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) {
+.flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow) {
   @line-height: unit(@base-line-height / @font-size);
   @coef: ceil(1 / @line-height);
 
@@ -24,26 +24,26 @@
   font-size: 1rem * (@font-size / @cfg-rem-size);
   line-height: round(@line-height * @coef, @cfg-decimal);
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin){
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow){
   .flow(_private, @font-size, @base-line-height, @margin);
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-top) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow) when (@margin = @flow-top) {
   margin-bottom: 0;
   margin-top: @base-line-height;
   margin-top: round(.1rem * @base-line-height, @cfg-decimal);
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-bottom) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow) when (@margin = @flow-bottom) {
   margin-bottom: @base-line-height;
   margin-bottom: round(.1rem * @base-line-height, @cfg-decimal);
   margin-top: 0;
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-both) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow) when (@margin = @flow-both) {
   margin-top: 2 * @base-line-height;
   margin-top: round(.2rem * @base-line-height, @cfg-decimal);
   margin-bottom: @base-line-height;
   margin-bottom: round(.1rem * @base-line-height, @cfg-decimal);
 }
-.flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-middle) {
+.flow(@font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow) when (@margin = @flow-middle) {
   margin-top: @base-line-height;
   margin-top: round(.1rem * @base-line-height, @cfg-decimal);
   margin-bottom: @base-line-height;
@@ -55,7 +55,7 @@
 .flow-heads(
   @font-size,
   @line-height,
-  @margin: @flow-margin,
+  @margin: @cfg-font-flow,
   @multiply: @cfg-font-limit,
   @ease: linear
 ) {
@@ -71,7 +71,7 @@
 .flow-ease(
   @font-size,
   @line-height,
-  @margin: @flow-margin,
+  @margin: @cfg-font-flow,
   @multiply: @cfg-font-limit,
   @t: 1,
   @d: 6,
