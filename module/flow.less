@@ -9,11 +9,11 @@
 @flow-middle: middle;
 @flow-both:   both;
 
-@flow-limit:  3;
-
-// !Std vars
 @flow-line-height: @cfg-font-size * @cfg-line-height;
-@flow-margin: @flow-both;
+
+// !Config
+@cfg-font-limit: 3;
+@cfg-font-flow:  @flow-both;
 
 // !Flow
 .flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) {
@@ -56,7 +56,7 @@
   @font-size,
   @line-height,
   @margin: @flow-margin,
-  @multiply: @flow-limit,
+  @multiply: @cfg-font-limit,
   @ease: linear
 ) {
   &1 { .flow-ease(@font-size, @line-height, @margin, @multiply, 1, 6, @ease) }
@@ -72,7 +72,7 @@
   @font-size,
   @line-height,
   @margin: @flow-margin,
-  @multiply: @flow-limit,
+  @multiply: @cfg-font-limit,
   @t: 1,
   @d: 6,
   @ease: linear
