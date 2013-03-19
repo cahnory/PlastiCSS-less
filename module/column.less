@@ -46,26 +46,34 @@
 //  }
 //
 
-@column-cfg-set:  '-set';
-@column-cfg-span: '.span-';
-@column-cfg-jump: '.jump-';
+@column-cfg-margin:  2%;
+@column-cfg-set:     '-set';
+@column-cfg-span:    '.span-';
+@column-cfg-jump:    '.jump-';
 
-.column(_private, @size, @index, @span, @jump) {
+.column(_private, @size, @margin, @index, @span, @jump) {
   @indexJump: @index - 1;
   @spanSelector: ~'@{span}@{index}';
   @jumpSelector: ~'@{jump}@{indexJump}';
+  
+  @innerWidth: (100% - @margin * (@size - 1)) / @size;
 
-  &@{spanSelector} { width: round(100% / @size * @index, @cfg-decimal-percent) }
-  &@{jumpSelector} { margin-left: round(100% / @size * (@index - 1), @cfg-decimal-percent) }
+  &@{spanSelector} {
+    width: round(@innerWidth * @index + @margin * (@index - 1), @cfg-decimal-percent);
+  }
+  &@{jumpSelector} {
+    margin-left: round(@innerWidth * @indexJump + @margin * (@index - 1), @cfg-decimal-percent);
+  }
 }
 .column(
   @size,
-  @set:  @column-cfg-set,
-  @span: @column-cfg-span,
-  @jump: @column-cfg-jump
-) {
+  @margin: @column-cfg-margin,
+  @set:    @column-cfg-set,
+  @span:   @column-cfg-span,
+  @jump:   @column-cfg-jump
+) when not (@size = _private) {
   float: left;
-  width: round(100% / @size, @cfg-decimal-percent);
+  width: round(((100% - @margin * (@size - 1)) / @size), @cfg-decimal-percent);
   .vendor(box-sizing, border-box);
 
   @setSelector: ~'@{set}';
@@ -73,34 +81,107 @@
     .clear(left);
   }
 }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  1) { .column(_private, @size,  2, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  2) { .column(_private, @size,  3, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  3) { .column(_private, @size,  4, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  4) { .column(_private, @size,  5, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  5) { .column(_private, @size,  6, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  6) { .column(_private, @size,  7, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  7) { .column(_private, @size,  8, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  8) { .column(_private, @size,  9, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  9) { .column(_private, @size, 10, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 10) { .column(_private, @size, 11, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 11) { .column(_private, @size, 12, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 12) { .column(_private, @size, 13, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 13) { .column(_private, @size, 14, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 14) { .column(_private, @size, 15, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 15) { .column(_private, @size, 16, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 16) { .column(_private, @size, 17, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 17) { .column(_private, @size, 18, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 18) { .column(_private, @size, 19, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 19) { .column(_private, @size, 20, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 20) { .column(_private, @size, 21, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 21) { .column(_private, @size, 22, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 22) { .column(_private, @size, 23, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 23) { .column(_private, @size, 24, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 24) { .column(_private, @size, 25, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 25) { .column(_private, @size, 26, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 26) { .column(_private, @size, 27, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 27) { .column(_private, @size, 28, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 28) { .column(_private, @size, 29, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 29) { .column(_private, @size, 30, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 30) { .column(_private, @size, 31, @span, @jump) }
-.column(@size, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 31) { .column(_private, @size, 32, @span, @jump) }
+.column(
+  @size,
+  @margin: @column-cfg-margin,
+  ...
+) when not (@size = _private) and not (@margin = 0) {
+  margin-right: @margin;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  1) {
+  .column(_private, @size, @margin,  2, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  2) {
+  .column(_private, @size, @margin,  3, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  3) {
+  .column(_private, @size, @margin,  4, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  4) {
+  .column(_private, @size, @margin,  5, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  5) {
+  .column(_private, @size, @margin,  6, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  6) {
+  .column(_private, @size, @margin,  7, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  7) {
+  .column(_private, @size, @margin,  8, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  8) {
+  .column(_private, @size, @margin,  9, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  9) {
+  .column(_private, @size, @margin, 10, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 10) {
+  .column(_private, @size, @margin, 11, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 11) {
+  .column(_private, @size, @margin, 12, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 12) {
+  .column(_private, @size, @margin, 13, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 13) {
+  .column(_private, @size, @margin, 14, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 14) {
+  .column(_private, @size, @margin, 15, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 15) {
+  .column(_private, @size, @margin, 16, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 16) {
+  .column(_private, @size, @margin, 17, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 17) {
+  .column(_private, @size, @margin, 18, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 18) {
+  .column(_private, @size, @margin, 19, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 19) {
+  .column(_private, @size, @margin, 20, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 20) {
+  .column(_private, @size, @margin, 21, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 21) {
+  .column(_private, @size, @margin, 22, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 22) {
+  .column(_private, @size, @margin, 23, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 23) {
+  .column(_private, @size, @margin, 24, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 24) {
+  .column(_private, @size, @margin, 25, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 25) {
+  .column(_private, @size, @margin, 26, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 26) {
+  .column(_private, @size, @margin, 27, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 27) {
+  .column(_private, @size, @margin, 28, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 28) {
+  .column(_private, @size, @margin, 29, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 29) {
+  .column(_private, @size, @margin, 30, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 30) {
+  .column(_private, @size, @margin, 31, @span, @jump);
+}
+.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 31) {
+  .column(_private, @size, @margin, 32, @span, @jump);
+}
