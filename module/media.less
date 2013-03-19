@@ -16,8 +16,8 @@
 //
 @media-large-min:  @cfg-media-large;
 @media-medium-min: @cfg-media-medium;
-@media-medium-max: @cfg-media-large-min - 1;
-@media-small-max:  @cfg-media-medium-min - 1;
+@media-medium-max: @media-large-min - 1;
+@media-small-max:  @media-medium-min - 1;
 
 // == Normal
 @media-normal:     ~'(min-width: @{media-large-min})';
@@ -39,7 +39,7 @@
 
 // <  Medium, == Small
 @media-lt-medium:  ~'(max-width: @{media-small-max})';
-@media-small:      @cfg-lt-medium;
+@media-small:      @media-lt-medium;
 
 // Retina (picked from: KNACSS by Raphaël Goetter - http://knacss.com)
 @media-retina:     ~'(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)';
