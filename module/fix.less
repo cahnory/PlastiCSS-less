@@ -5,8 +5,19 @@
 
 .fix() {
   .fix(adjacent);
+  .fix(disabled);
 }
+
+// Thanks to: Chris Coyier - http://css-tricks.com/webkit-sibling-bug/
 .fix(adjacent) {
   @-webkit-keyframes adjacentSelectorWebkitBugFix { from { display: block } to { display: block } }
   body { -webkit-animation: adjacentSelectorWebkitBugFix infinite 1s; }
+}
+
+// Thanks to: Vincent De Oliveira - http://blog.iamvdo.me/post/42510603205/styler-les-input-inactifs-disabled-sur-ios-iphone
+.fix(disabled) {
+  [disabled] {
+    opacity: 1;
+    -webkit-text-fill-color: currentcolor;
+  }
 }
