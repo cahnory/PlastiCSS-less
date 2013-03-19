@@ -12,10 +12,8 @@
 @flow-limit:  3;
 
 // !Std vars
-@flow-line-height: 15px;
-@flow-precision: 1000;
+@flow-line-height: @cfg-font-size * @cfg-line-height;
 @flow-margin: @flow-both;
-
 
 // !Flow
 .flow(_private, @font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) {
@@ -23,7 +21,7 @@
   @coef: ceil(1 / @line-height);
 
   font-size: @font-size;
-  font-size: 1rem * (@font-size / 10);
+  font-size: 1rem * (@font-size / @cfg-rem-size);
   line-height: round(@line-height * @coef, @cfg-decimal);
 }
 .flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin){
@@ -32,24 +30,24 @@
 .flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-top) {
   margin-bottom: 0;
   margin-top: @base-line-height;
-  margin-top: .1rem * @base-line-height;
+  margin-top: round(.1rem * @base-line-height, @cfg-decimal);
 }
 .flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-bottom) {
   margin-bottom: @base-line-height;
-  margin-bottom: .1rem * @base-line-height;
+  margin-bottom: round(.1rem * @base-line-height, @cfg-decimal);
   margin-top: 0;
 }
 .flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-both) {
   margin-top: 2 * @base-line-height;
-  margin-top: .2rem * @base-line-height;
+  margin-top: round(.2rem * @base-line-height, @cfg-decimal);
   margin-bottom: @base-line-height;
-  margin-bottom: .1rem * @base-line-height;
+  margin-bottom: round(.1rem * @base-line-height, @cfg-decimal);
 }
 .flow(@font-size, @base-line-height: @flow-line-height, @margin: @flow-margin) when (@margin = @flow-middle) {
   margin-top: @base-line-height;
-  margin-top: .1rem * @base-line-height;
+  margin-top: round(.1rem * @base-line-height, @cfg-decimal);
   margin-bottom: @base-line-height;
-  margin-bottom: .1rem * @base-line-height;
+  margin-bottom: round(.1rem * @base-line-height, @cfg-decimal);
 }
 
 
