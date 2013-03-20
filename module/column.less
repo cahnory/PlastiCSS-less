@@ -45,6 +45,11 @@
 //    margin-left: 75%;
 //  }
 //
+// Requirement:
+// ************
+//  + html element must have the dir attribute defined
+//    with 'ltr' or 'rtl' value
+//
 
 @column-cfg-margin:  2%;
 @column-cfg-set:     '-set';
@@ -57,13 +62,13 @@
   @jumpSelector: ~'@{jump}@{indexJump}';
   
   @innerWidth: (100% - @margin * (@size - 1)) / @size;
+  @width:  round(@innerWidth * @index + @margin * (@index - 1), @cfg-decimal-percent);
+  @realMargin: round(@innerWidth * @indexJump + @margin * (@index - 1), @cfg-decimal-percent);
+  
+  &@{spanSelector} { width: @width }
 
-  &@{spanSelector} {
-    width: round(@innerWidth * @index + @margin * (@index - 1), @cfg-decimal-percent);
-  }
-  &@{jumpSelector} {
-    margin-left: round(@innerWidth * @indexJump + @margin * (@index - 1), @cfg-decimal-percent);
-  }
+  [dir="ltr"] &@{jumpSelector} { margin-left: @realMargin }
+  [dir="rtl"] &@{jumpSelector} { margin-right: @realMargin }
 }
 .column(
   @size,
@@ -72,23 +77,40 @@
   @span:   @column-cfg-span,
   @jump:   @column-cfg-jump
 ) when not (@size = _private) {
-  float: left;
+  @setSelector: ~'@{set}';
+
   width: round(((100% - @margin * (@size - 1)) / @size), @cfg-decimal-percent);
   .vendor(box-sizing, border-box);
 
-  @setSelector: ~'@{set}';
   &@{setSelector} {
-    .clear(left);
+    .clear();
   }
+
+  // LTR
+  [dir="ltr"] & { float: left }
+
+  // RTL
+  [dir="rtl"] & { float: right }
 }
 .column(
   @size,
   @margin: @column-cfg-margin,
   ...
 ) when not (@size = _private) and not (@margin = 0) {
-  margin-right: @margin;
-  &:last-child {
-    margin-right: 0;
+  // LTR
+  [dir="ltr"] & {
+    margin-right: @margin;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  // RTL
+  [dir="rtl"] & {
+    margin-left: @margin;
+    &:last-child {
+      margin-left: 0;
+    }
   }
 }
 
