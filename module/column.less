@@ -1,6 +1,6 @@
 //
-// !Column: Define columns set of any size up to 32
-// ================================================
+// !Column: Define columns set of any size
+// =======================================
 //
 // Usage:
 // ******
@@ -55,50 +55,41 @@
 @column-cfg-set:     '-set';
 @column-cfg-span:    '.span-';
 @column-cfg-jump:    '.jump-';
+@column-cfg-jump:    '.jump-';
+@column-cfg-break:   @cfg-media-medium - 1;
 
-.column(_private, @size, @margin, @index, @span, @jump) {
-  @indexJump: @index - 1;
-  @spanSelector: ~'@{span}@{index}';
-  @jumpSelector: ~'@{jump}@{indexJump}';
-  
-  @innerWidth: (100% - @margin * (@size - 1)) / @size;
-  @width:  round(@innerWidth * @index + @margin * (@index - 1), @cfg-decimal-percent);
-  @realMargin: round(@innerWidth * @indexJump + @margin * (@index - 1), @cfg-decimal-percent);
-  
-  &@{spanSelector} { width: @width }
-
-  [dir="ltr"] &@{jumpSelector} { margin-left: @realMargin }
-  [dir="rtl"] &@{jumpSelector} { margin-right: @realMargin }
-}
+// !Column and column set
 .column(
   @size,
   @margin: @column-cfg-margin,
+  @break:  @column-cfg-break,
   @set:    @column-cfg-set,
   @span:   @column-cfg-span,
   @jump:   @column-cfg-jump
-) when not (@size = _private) {
-  @setSelector: ~'@{set}';
-
-  width: round(((100% - @margin * (@size - 1)) / @size), @cfg-decimal-percent);
-  .vendor(box-sizing, border-box);
-
-  &@{setSelector} {
+) when not (iskeyword(@size)) {
+  // wrapper
+  @wrapper: ~'@{set}';
+  &@{wrapper} {
     .clear();
   }
+  
+  // column
+  width: round(((100% - @margin * (@size - 1)) / @size), @cfg-decimal-percent);
+  .vendor(box-sizing, border-box);
+  
+  // variants
+  .column(base-dir, @margin);
+  .column(span, @size, @margin, @span);
+  .column(jump, @size, @margin, @jump);
+  .column(break, @size, @break, @span, @jump);
 }
-.column(
-  @size,
-  @margin: @column-cfg-margin,
-  ...
-) when not (@size = _private) and (@margin = 0) {
+
+// repartition
+.column(base-dir, @margin) when (@margin = 0) {
   [dir="ltr"] & { float: left }
   [dir="rtl"] & { float: right }
 }
-.column(
-  @size,
-  @margin: @column-cfg-margin,
-  ...
-) when not (@size = _private) and not (@margin = 0) {
+.column(base-dir, @margin) when not (@margin = 0) {
   [dir="ltr"] & {
     float: left;
     margin-right: @margin;
@@ -115,96 +106,89 @@
   }
 }
 
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  1) {
-  .column(_private, @size, @margin,  2, @span, @jump);
+
+// !Span
+.column(span, @size, @margin, @span) when (isstring(@span)) and not (@span = '') {
+  .column(span, @size, @margin, @size, ~'@{span}');
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  2) {
-  .column(_private, @size, @margin,  3, @span, @jump);
+.column(span, @size, @margin, @index, @span) when (@index > 2) {
+  .column(span, @size, @margin, @index - 1, @span);
+  .column(span-css, @size, @margin, @index, @span);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  3) {
-  .column(_private, @size, @margin,  4, @span, @jump);
+.column(span, @size, @margin, @index, @span) when (@index = 2) {
+  .column(span-css, @size, @margin, @index, @span);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  4) {
-  .column(_private, @size, @margin,  5, @span, @jump);
+.column(span-css, @size, @margin, @index, @span) {
+  @innerWidth: (100% - @margin * (@size - 1)) / @size;
+  @width:  round(@innerWidth * @index + @margin * (@index - 1), @cfg-decimal-percent);
+  
+  &@{span}@{index} { width: @width }
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  5) {
-  .column(_private, @size, @margin,  6, @span, @jump);
+
+// !Jump
+.column(jump, @size, @margin, @jump) when (isstring(@jump)) and not (@jump = '') {
+  .column(jump, @size, @margin, @size, ~'@{jump}');
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  6) {
-  .column(_private, @size, @margin,  7, @span, @jump);
+.column(jump, @size, @margin, @index, @jump) when (@index > 2) {
+  .column(jump, @size, @margin, @index - 1, @jump);
+  .column(jump-css, @size, @margin, @index, @jump);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  7) {
-  .column(_private, @size, @margin,  8, @span, @jump);
+.column(jump, @size, @margin, @index, @span, @jump) when (@index = 2) {
+  .column(jump-css, @size, @margin, @index, @jump);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  8) {
-  .column(_private, @size, @margin,  9, @span, @jump);
+.column(jump-css, @size, @margin, @index, @jump) {
+  @jumps: @index - 1;
+  @innerWidth: (100% - @margin * (@size - 1)) / @size;
+  @realMargin: round(@innerWidth * @jumps + @margin * (@index - 1), @cfg-decimal-percent);
+
+  [dir="ltr"] &@{jump}@{jumps} { margin-left: @realMargin }
+  [dir="rtl"] &@{jump}@{jumps} { margin-right: @realMargin }
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size >  9) {
-  .column(_private, @size, @margin, 10, @span, @jump);
+
+
+// !Break point
+.column(break, @size, @break, @span, @jump) {
+  @query: ~'(max-width: @{break})';
+  @media @query {
+    & {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+    .column(break-span, @size, @span);
+    .column(break-jump, @size, @jump);
+  }
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 10) {
-  .column(_private, @size, @margin, 11, @span, @jump);
+
+// !Break > span
+.column(break-span, @size, @selector) when (isstring(@selector)) and not (@selector = '') {
+  .column(break-span-loop, @size, ~'@{selector}');
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 11) {
-  .column(_private, @size, @margin, 12, @span, @jump);
+.column(break-span-loop, @index, @selector) when (@index > 2) {
+  .column(break-span-loop, @index - 1, @selector);
+  .column(break-span-css, @index, @selector);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 12) {
-  .column(_private, @size, @margin, 13, @span, @jump);
+.column(break-span-loop, @index, @selector) when (@index = 2) {
+  .column(break-span-css, @index, @selector);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 13) {
-  .column(_private, @size, @margin, 14, @span, @jump);
+.column(break-span-css, @index, @selector) {
+  &@{selector}@{index} { width: 100% }
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 14) {
-  .column(_private, @size, @margin, 15, @span, @jump);
+
+// !Break > jump
+.column(break-jump, @size, @selector) when (isstring(@selector)) and not (@selector = '') {
+  .column(break-jump-loop, @size - 1, ~'@{selector}');
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 15) {
-  .column(_private, @size, @margin, 16, @span, @jump);
+.column(break-jump-loop, @index, @selector) when (@index > 2) {
+  .column(break-jump-loop, @index - 1, @selector);
+  .column(break-jump-css, @index, @selector);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 16) {
-  .column(_private, @size, @margin, 17, @span, @jump);
+.column(break-jump-loop, @index, @selector) when (@index = 2) {
+  .column(break-jump-css, @index, @selector);
 }
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 17) {
-  .column(_private, @size, @margin, 18, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 18) {
-  .column(_private, @size, @margin, 19, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 19) {
-  .column(_private, @size, @margin, 20, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 20) {
-  .column(_private, @size, @margin, 21, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 21) {
-  .column(_private, @size, @margin, 22, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 22) {
-  .column(_private, @size, @margin, 23, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 23) {
-  .column(_private, @size, @margin, 24, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 24) {
-  .column(_private, @size, @margin, 25, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 25) {
-  .column(_private, @size, @margin, 26, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 26) {
-  .column(_private, @size, @margin, 27, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 27) {
-  .column(_private, @size, @margin, 28, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 28) {
-  .column(_private, @size, @margin, 29, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 29) {
-  .column(_private, @size, @margin, 30, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 30) {
-  .column(_private, @size, @margin, 31, @span, @jump);
-}
-.column(@size, @margin: @column-cfg-margin, @set: @column-cfg-set, @span: @column-cfg-span, @jump: @column-cfg-jump) when (@size > 31) {
-  .column(_private, @size, @margin, 32, @span, @jump);
+.column(break-jump-css, @index, @selector) {
+  [dir] &@{selector}@{index} {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
