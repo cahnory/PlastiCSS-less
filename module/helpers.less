@@ -84,22 +84,22 @@
 .pos(@rest,...) {
   position: absolute;
 }
-.pos(@pos) {
-  .pos(@pos, @pos, top left);
+.pos(@pos, @ref: top left) when not (isnumber(@ref)) {
+  .pos(@pos, @pos, @ref);
 }
-.pos(@x, @y) {
+.pos(@x, @y) when (isnumber(@y)) {
   .pos(@x, @y, top left);
 }
-.pos(@x, @y, @pos) when not (@pos = right) and not (@pos = ~'right top') and not (@pos = ~'right bottom') and not (@pos = ~'top right') and not (@pos = ~'bottom right') {
+.pos(@x, @y, @ref) when (@ref = left), (@ref = ~'left top'), (@ref = ~'left bottom'), (@ref = ~'top left'), (@ref = ~'bottom left') {
   left: @x;
 }
-.pos(@x, @y, @pos) when (@pos = right), (@pos = ~'right top'), (@pos = ~'right bottom'), (@pos = ~'top right'), (@pos = ~'bottom right') {
+.pos(@x, @y, @ref) when (@ref = right), (@ref = ~'right top'), (@ref = ~'right bottom'), (@ref = ~'top right'), (@ref = ~'bottom right') {
   right: @x;
 }
-.pos(@x, @y, @pos) when not (@pos = bottom) and not (@pos = ~'bottom left') and not (@pos = ~'bottom right') and not (@pos = ~'left bottom') and not (@pos = ~'right bottom') {
+.pos(@x, @y, @ref) when (@ref = top), (@ref = ~'top left'), (@ref = ~'top right'), (@ref = ~'left top'), (@ref = ~'right top') {
   top: @y;
 }
-.pos(@x, @y, @pos) when (@pos = bottom), (@pos = ~'bottom left'), (@pos = ~'bottom right'), (@pos = ~'left bottom'), (@pos = ~'right bottom') {
+.pos(@x, @y, @ref) when (@ref = bottom), (@ref = ~'bottom left'), (@ref = ~'bottom right'), (@ref = ~'left bottom'), (@ref = ~'right bottom') {
   bottom: @y;
 }
 
@@ -107,22 +107,22 @@
 .move(@rest,...) {
   position: relative;
 }
-.move(@pos) {
-  .move(@pos, @pos, top left)
+.move(@pos, @ref: top left) when not (isnumber(@ref)) {
+  .move(@pos, @pos, @ref);
 }
-.move(@x, @y) {
-  .move(@x, @y, top left)
+.move(@x, @y) when (isnumber(@y)) {
+  .move(@x, @y, top left);
 }
-.move(@x, @y, @pos) when not (@pos = right) and not (@pos = ~'right top') and not (@pos = ~'right bottom') and not (@pos = ~'top right') and not (@pos = ~'bottom right') {
+.move(@x, @y, @ref) when (@ref = left), (@ref = ~'left top'), (@ref = ~'left bottom'), (@ref = ~'top left'), (@ref = ~'bottom left') {
   left: @x;
 }
-.move(@x, @y, @pos) when (@pos = right), (@pos = ~'right top'), (@pos = ~'right bottom'), (@pos = ~'top right'), (@pos = ~'bottom right') {
+.move(@x, @y, @ref) when (@ref = right), (@ref = ~'right top'), (@ref = ~'right bottom'), (@ref = ~'top right'), (@ref = ~'bottom right') {
   right: @x;
 }
-.move(@x, @y, @pos) when not (@pos = bottom) and not (@pos = ~'bottom left') and not (@pos = ~'bottom right') and not (@pos = ~'left bottom') and not (@pos = ~'right bottom') {
+.move(@x, @y, @ref) when (@ref = top), (@ref = ~'top left'), (@ref = ~'top right'), (@ref = ~'left top'), (@ref = ~'right top') {
   top: @y;
 }
-.move(@x, @y, @pos) when (@pos = bottom), (@pos = ~'bottom left'), (@pos = ~'bottom right'), (@pos = ~'left bottom'), (@pos = ~'right bottom') {
+.move(@x, @y, @ref) when (@ref = bottom), (@ref = ~'bottom left'), (@ref = ~'bottom right'), (@ref = ~'left bottom'), (@ref = ~'right bottom') {
   bottom: @y;
 }
 
