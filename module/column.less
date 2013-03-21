@@ -85,11 +85,13 @@
   &@{setSelector} {
     .clear();
   }
-
-  // LTR
+}
+.column(
+  @size,
+  @margin: @column-cfg-margin,
+  ...
+) when not (@size = _private) and (@margin = 0) {
   [dir="ltr"] & { float: left }
-
-  // RTL
   [dir="rtl"] & { float: right }
 }
 .column(
@@ -97,16 +99,15 @@
   @margin: @column-cfg-margin,
   ...
 ) when not (@size = _private) and not (@margin = 0) {
-  // LTR
   [dir="ltr"] & {
+    float: left;
     margin-right: @margin;
     &:last-child {
       margin-right: 0;
     }
   }
-
-  // RTL
   [dir="rtl"] & {
+    float: right;
     margin-left: @margin;
     &:last-child {
       margin-left: 0;
