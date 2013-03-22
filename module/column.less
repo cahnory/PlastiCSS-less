@@ -129,11 +129,11 @@
 .column(jump, @size, @margin, @jump) when (isstring(@jump)) and not (@jump = '') {
   .column(jump, @size, @margin, @size, ~'@{jump}');
 }
-.column(jump, @size, @margin, @index, @jump) when (@index > 2) {
+.column(jump, @size, @margin, @index, @jump) when (@index > 1) {
   .column(jump, @size, @margin, @index - 1, @jump);
   .column(jump-css, @size, @margin, @index, @jump);
 }
-.column(jump, @size, @margin, @index, @span, @jump) when (@index = 2) {
+.column(jump, @size, @margin, @index, @span, @jump) when (@index = 1) {
   .column(jump-css, @size, @margin, @index, @jump);
 }
 .column(jump-css, @size, @margin, @index, @jump) {
@@ -179,11 +179,11 @@
 .column(break-jump, @size, @selector) when (isstring(@selector)) and not (@selector = '') {
   .column(break-jump-loop, @size - 1, ~'@{selector}');
 }
-.column(break-jump-loop, @index, @selector) when (@index > 2) {
+.column(break-jump-loop, @index, @selector) when (@index > 1) {
   .column(break-jump-loop, @index - 1, @selector);
   .column(break-jump-css, @index, @selector);
 }
-.column(break-jump-loop, @index, @selector) when (@index = 2) {
+.column(break-jump-loop, @index, @selector) when (@index = 1) {
   .column(break-jump-css, @index, @selector);
 }
 .column(break-jump-css, @index, @selector) {
