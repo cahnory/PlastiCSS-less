@@ -1,6 +1,9 @@
 //
 // !Font: common and "solid" font stacks
 // =====================================
+//  + list of solid font stacks
+//  + font-face helper
+//  + font-face package pattern
 //
 
 // !Monospace
@@ -45,6 +48,7 @@
   
 @font-serif: @font-arial;
 
+// !Font-face
 .font-face(@family, @file, @idSvg, @weight: normal, @style: normal, @param: '') {
   @font-face {
     font-family: @family;

@@ -1,0 +1,54 @@
+/* !icon.less */
+@cfg-icon-size:     16px;
+@cfg-icon-position: before;
+@cfg-icon-font:     none;
+
+.icon(_private, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @ltr: ~':before', @rtl: ~':after') {
+  [dir="ltr"] &@{ltr},
+  [dir="rtl"] &@{rtl} {
+    content: ' ' @glyphe ' ';
+    .vendor(display, inline-block);
+    .icon(_private-font, @font);
+    .icon(_private-size, @size);
+    line-height: 1em;
+    min-width: 1em;
+    speak: none;
+    text-align: center;
+  }
+}
+.icon(_private-font, @font) when not (@font = none) {
+  font-family: @font;
+  vertical-align: middle;
+}
+.icon(_private-size, @size) when not (isem(@size)) and not (ispercent(@size)) {
+  .rem(font-size, @size);
+}
+.icon(_private-size, @size) when (isem(@size)), (ispercent(@size)) {
+  font-size: @size;
+}
+
+.icon(@glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font) when not (iskeyword(@glyphe)) {
+  .icon(@cfg-icon-position, @glyphe, @size, @font);
+}
+.icon(before, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font) {
+  .icon(_private, @glyphe, @size, @font, ~':before', ~':after');
+}
+.icon(after, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font) {
+  .icon(_private, @glyphe, @size, @font, ~':after', ~':before');
+}
+
+.icon-glyphe(@glyphe) {
+  .icon-glyphe(@cfg-icon-position, @glyphe);
+}
+.icon-glyphe(before, @glyphe) {
+  [dir="ltr"] &:before,
+  [dir="rtl"] &:after {
+    content: ' ' @glyphe ' ';
+  }
+}
+.icon-glyphe(after, @glyphe) {
+  [dir="ltr"] &:after,
+  [dir="rtl"] &:before {
+    content: ' ' @glyphe ' ';
+  }
+}

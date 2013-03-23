@@ -3,6 +3,37 @@
 // ===============================
 //
 
+// The font-limit property specify the maximum coefficient
+// applied to the base font-size.
+// Commonly, the font-size of the h1 element will be equal to
+// @cfg-font-size * @cfg-font-limit.
+@cfg-font-limit:  3;
+
+// The font-flow property specify the margin position of
+// verticaly rhytmed elements.
+// The <font-flow> may take one of the following values:
+//
+//  + top:    top: 1, bottom: 0
+//  + bottom: top: 0, bottom: 1
+//  + middle: top: 1, bottom: 1
+//  + both:   top: 2, bottom: 1
+@cfg-font-flow:   @flow-both;
+
+// The font-ease property specify the easing function used to
+// distribute font-size across headings elements.
+// The <font-ease> may take one of the following values:
+//
+//  + linear
+//  + easeInQuad
+//  + easeOutQuad
+//  + easeInCubic
+//  + easeOutCubic
+//  + easeInQuart
+//  + easeOutQuart
+//  + easeInQuint
+//  + easeOutQuint
+@cfg-font-ease:   linear;
+
 // !"Constants"
 @flow-top:    top;
 @flow-bottom: bottom;
@@ -12,8 +43,6 @@
 @flow-line-height: @cfg-font-size * @cfg-line-height;
 
 // !Config
-@cfg-font-limit: 3;
-@cfg-font-flow:  @flow-both;
 
 // !Flow
 .flow(_private, @font-size: @cfg-font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) {

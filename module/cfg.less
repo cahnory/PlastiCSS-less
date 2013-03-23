@@ -1,23 +1,52 @@
-// !Directories
-@cfg-dir-font: '../font/';
-@cfg-dir-img:  '../img/';
+// !Assets
+// =======
+@cfg-dir-font:        '../font/';
+@cfg-dir-img:         '../img/';
+
 
 // !Fonts
-@cfg-font-size:   16px;
-@cfg-line-height: 1.5;
-@cfg-font-limit:  3;
-@cfg-font-flow:   both;
-@cfg-font-ease:   linear;
-@cfg-rem-size:    10px;
+// ======
+// The font-family property specify the main font-family stack of
+// your document.
+@cfg-font-family:     @font-sans-serif;
 
-@cfg-font-family: @font-sans-serif;
+// The font-size property specify the base font-size of
+// your document.
+@cfg-font-size:       16px;
 
-// !Medias minimum width
-@cfg-media-large:  1024px;
-@cfg-media-medium: 640px;
-@cfg-media-small:  0;
+// The line-height property specify a multiplier applied to
+// <font-size> to get the line-height unit of your document.
+// The <line-height> may take a floating value.
+@cfg-line-height:     1.5;
 
-// !Formats
+// The direction property specify the expected reading direction
+// of the documents stylesheet is applied to.
+// The <direction> may take one of the following values:
+//
+//  + ltr:    Left to right
+//  + rtl:    Right to left
+//  + both:   Both directions
+//
+// Using both directions, may results in more code.
+@cfg-direction:       ltr;
+
+// The rem-size property specify the pixel value of one rem unit.
+@cfg-rem-size:        10px;
+
+
+// !Breakpoints
+// ============
+// The media-* properties specify the minimum width for small,
+// medium and large screen.
+@cfg-media-large:     1024px;
+@cfg-media-medium:    640px;
+@cfg-media-small:     0;
+
+
+// !Numbers
+// ========
+// The decimal-* properties specify the max number of decimal for
+// each units.
 @cfg-decimal:         4;
 @cfg-decimal-em:      @cfg-decimal;
 @cfg-decimal-percent: @cfg-decimal;
