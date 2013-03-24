@@ -1,54 +1,87 @@
-/* !icon.less */
-@cfg-icon-size:     16px;
+// !icon.less
+@cfg-icon-size:     1em;
 @cfg-icon-position: before;
 @cfg-icon-font:     none;
 
-.icon(_private, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @ltr: ~':before', @rtl: ~':after') {
-  [dir="ltr"] &@{ltr},
-  [dir="rtl"] &@{rtl} {
-    content: ' ' @glyphe ' ';
-    .vendor(display, inline-block);
-    .icon(_private-font, @font);
-    .icon(_private-size, @size);
-    line-height: 1em;
-    min-width: 1em;
-    speak: none;
-    text-align: center;
-  }
+// Set icon with before or after pseudo element.
+.icon(@glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @direction: @cfg-direction) when not (iskeyword(@glyphe)) {
+  .icon(@cfg-icon-position, @glyphe, @size, @font);
 }
-.icon(_private-font, @font) when not (@font = none) {
+.icon(before, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @direction: @cfg-direction) {
+  .icon(construct, @glyphe, @size, @font, ~':before', ~':after', @direction);
+}
+.icon(after, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @direction: @cfg-direction) {
+  .icon(construct, @glyphe, @size, @font, ~':after', ~':before', @direction);
+}
+
+// Set icon glyphe
+.icon-glyphe(@glyphe, @direction: @cfg-direction) when not (iskeyword(@glyphe)) {
+  .icon-glyphe(@cfg-icon-position, @glyphe, @direction);
+}
+.icon-glyphe(before, @glyphe, @direction: @cfg-direction) {
+  .icon-glyphe(construct, @glyphe, ~':before', ~':after', @direction);
+}
+.icon-glyphe(after, @glyphe, @direction: @cfg-direction) {
+  .icon-glyphe(construct, @glyphe, ~':after', ~':before', @direction);
+}
+
+
+// !Private
+// ********************************************************** //
+
+// Base icon
+.icon(css-base, @glyphe, @size, @font) {
+  content: @glyphe;
+  .vendor(display, inline-block);
+  .icon(css-family, @font);
+  .icon(css-size, @size);
+  line-height: 1em;
+  min-width: 1em;
+  speak: none;
+  text-align: center;
+}
+
+// Font-family
+.icon(css-family, @font) when not (@font = none) {
   font-family: @font;
   vertical-align: middle;
 }
-.icon(_private-size, @size) when not (isem(@size)) and not (ispercent(@size)) {
+
+// Font-size
+.icon(css-size, @size) when not (isem(@size)) and not (ispercent(@size)) {
   .rem(font-size, @size);
 }
-.icon(_private-size, @size) when (isem(@size)), (ispercent(@size)) {
+.icon(css-size, @size) when (isem(@size)), (ispercent(@size)) {
   font-size: @size;
 }
 
-.icon(@glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font) when not (iskeyword(@glyphe)) {
-  .icon(@cfg-icon-position, @glyphe, @size, @font);
+// Glyphe
+.icon-glyphe(construct, @glyphe, @ltr: ~':before', @rtl: ~':after', @direction: @cfg-direction) when (@direction = both) {
+  [dir="ltr"] &@{ltr},
+  [dir="rtl"] &@{rtl} { content: @glyphe; }
 }
-.icon(before, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font) {
-  .icon(_private, @glyphe, @size, @font, ~':before', ~':after');
+.icon-glyphe(construct, @glyphe, @ltr: ~':before', @rtl: ~':after', @direction: @cfg-direction) when (@direction = ltr) {
+  &@{ltr} { content: @glyphe; }
 }
-.icon(after, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font) {
-  .icon(_private, @glyphe, @size, @font, ~':after', ~':before');
+.icon-glyphe(construct, @glyphe, @ltr: ~':before', @rtl: ~':after', @direction: @cfg-direction) when (@direction = ltr) {
+  &@{rtl} { content: @glyphe; }
 }
 
-.icon-glyphe(@glyphe) {
-  .icon-glyphe(@cfg-icon-position, @glyphe);
-}
-.icon-glyphe(before, @glyphe) {
-  [dir="ltr"] &:before,
-  [dir="rtl"] &:after {
-    content: ' ' @glyphe ' ';
+// !Constructor
+.icon(construct, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @ltr: ~':before', @rtl: ~':after', @direction) when (@direction = both) {
+  [dir="ltr"] &@{ltr},
+  [dir="rtl"] &@{rtl} {
+    .icon(css-base, @glyphe, @size, @font);
   }
 }
-.icon-glyphe(after, @glyphe) {
-  [dir="ltr"] &:after,
-  [dir="rtl"] &:before {
-    content: ' ' @glyphe ' ';
+.icon(construct, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @ltr: ~':before', @rtl: ~':after', @direction) when (@direction = ltr) {
+  &@{ltr} {
+    .icon(css-base, @glyphe, @size, @font);
   }
 }
+.icon(construct, @glyphe, @size: @cfg-icon-size, @font: @cfg-icon-font, @ltr: ~':before', @rtl: ~':after', @direction) when (@direction = rtl) {
+  &@{rtl} {
+    .icon(css-base, @glyphe, @size, @font);
+  }
+}
+
