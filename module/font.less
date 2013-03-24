@@ -48,6 +48,16 @@
   
 @font-serif: @font-arial;
 
+.font(html, @rem-size: @cfg-rem-size) {
+  font-size: 100% / 16px * @rem-size;
+}
+.font(body, @family: @cfg-font-family, @font-size: @cfg-font-size, @line-height: @cfg-line-height) {
+  font: ~'@{font-size}/@{line-height}' @family;
+}
+.font(body, @family: @cfg-font-family, @font-size: @cfg-font-size, @line-height: @cfg-line-height) when not (isem(@font-size)) {
+  .rem(only, font-size, @font-size);
+}
+
 // !Font-face
 .font-face(@family, @file, @idSvg, @weight: normal, @style: normal, @param: '') {
   @font-face {
