@@ -1,0 +1,55 @@
+// Standard config file. Copy it in your project
+// and custom at your convenience.
+//
+// Pick properties you want to edit out of the block
+// to get them applied.
+// Kind of drag and drop configurator ^^
+
+pickAndEdit {
+  // !Assets
+  @cfg-dir-font:        '../font/';
+  @cfg-dir-img:         '../img/';
+
+  // !Reading
+  @cfg-font-family:     @font-sans-serif;
+  @cfg-font-size:       1.6em;
+  @cfg-line-height:     1.5;
+  @cfg-font-limit:      3;
+  @cfg-font-flow:       both;
+  @cfg-font-ease:       linear;
+  @cfg-direction:       ltr;
+
+  @cfg-rem-size:        10px;
+
+
+  // !Breakpoints
+  @cfg-media-large:     1024px;
+  @cfg-media-medium:    640px;
+  @cfg-media-small:     0;
+
+  // !Numbers
+  @cfg-decimal:         4;
+  @cfg-decimal-em:      @cfg-decimal;
+  @cfg-decimal-percent: @cfg-decimal;
+  @cfg-decimal-px:      0;
+  @cfg-decimal-rem:     @cfg-decimal;
+
+  // !Modules default values
+  // ******************************************************** //
+  // !column
+  @column-cfg-margin:   2%;
+  @column-cfg-set:      '-set';
+  @column-cfg-span:     '.span-';
+  @column-cfg-jump:     '.jump-';
+  @column-cfg-break:    @cfg-media-medium - 1;
+
+  // !icon
+  @icon-cfg-size:       1em;
+  @icon-cfg-position:   before;
+  @icon-cfg-font:       none;
+
+  // !triangle
+  @triangle-cfg-width:  .5em;
+  @triangle-cfg-color:  #FFF;
+  @triangle-cfg-dir:    bottom;
+}
