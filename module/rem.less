@@ -5,15 +5,17 @@
 }
 
 // !define px and rem value for a given property
-.rem(only, @property, @value, @html: @cfg-rem-size) when (ispixel(@value)) {
-  @rem: 0rem + @value / @html;
-  .PlastiCSS(print, "@{property}: @{rem}");
-}
 .rem(@property, @value, @html: @cfg-rem-size) when not (ispixel(@value)) and not (@property = only) {
-  @px: round(0px + @value * @html);
-  .PlastiCSS(print, "@{property}: @{px}; @{property}: @{value}");
+  @rem: round(@value, @cfg-decimal-rem);
+  @px:  round(0px + @value * @html, @cfg-decimal-px);
+  .PlastiCSS(print, "@{property}: @{px}; @{property}: @{rem}");
 }
 .rem(@property, @value, @html: @cfg-rem-size) when (ispixel(@value)) and not (@property = only) {
-  @rem: 0rem + @value / @html;
-  .PlastiCSS(print, "@{property}: @{value}; @{property}: @{rem}");
+  @px: round(@value, @cfg-decimal-px);
+  @rem: round(0rem + @value / @html, @cfg-decimal-rem);
+  .PlastiCSS(print, "@{property}: @{px}; @{property}: @{rem}");
+}
+.rem(only, @property, @value, @html: @cfg-rem-size) when (ispixel(@value)) {
+  @rem: round(0rem + @value / @html, @cfg-decimal-rem);
+  .PlastiCSS(print, "@{property}: @{rem}");
 }
