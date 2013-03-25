@@ -40,46 +40,55 @@
 @flow-middle: middle;
 @flow-both:   both;
 
-@flow-line-height: round(@cfg-font-size * @cfg-line-height, @cfg-decimal-em);
+@flow-line-height: @cfg-font-size * @cfg-line-height;
 
 // !Config
 
 // !Flow
-// em
 .flow(
   @font-size:        @cfg-font-size,
   @base-line-height: @flow-line-height,
   @margin:           @cfg-font-flow,
   @head:             false
-) when not (iskeyword(@font-size)) and (isem(@font-size)) {
+) when not (iskeyword(@font-size)) {
   // font-size
-  font-size: round(@font-size / @cfg-font-size, @cfg-decimal-em);
+  .flow(font-size, @font-size);
 
   // line-height
-  @line-height: @base-line-height / @font-size;
-  @coef: ceil(1 / @line-height);
-  line-height: round(@line-height * @coef, @cfg-decimal-em);
+  .flow(line-height, @font-size, @base-line-height);
   
   // margin
   .flow(margin, @font-size, @base-line-height, @margin, @head);
 }
-// px/rem
-.flow(
-  @font-size:        @cfg-font-size,
-  @base-line-height: @flow-line-height,
-  @margin:           @cfg-font-flow,
-  @head:             false
-) when not (iskeyword(@font-size)) and not (isem(@font-size)) {
-  // font-size
-  .rem(font-size, round(@font-size, @cfg-decimal-px));
 
-  // line-height
+// Font-size
+.flow(font-size,
+  @font-size:        @cfg-font-size,
+) when (isem(@font-size)) {
+  font-size: round(@font-size / @cfg-font-size, @cfg-decimal-em);
+}
+.flow(font-size,
+  @font-size:        @cfg-font-size,
+) when not (isem(@font-size)) {
+  .rem(font-size, round(@font-size, @cfg-decimal-px));
+}
+
+// Line-height
+.flow(line-height,
+  @font-size:        @cfg-font-size,
+  @base-line-height: @flow-line-height
+) when (isem(@font-size)) {
+  @line-height: @base-line-height / @font-size;
+  @coef: ceil(1 / @line-height);
+  line-height: round(@line-height * @coef, @cfg-decimal-em);
+}
+.flow(line-height,
+  @font-size:        @cfg-font-size,
+  @base-line-height: @flow-line-height
+) when not (isem(@font-size)) {
   @line-height: @base-line-height / @font-size;
   @coef: ceil(1 / @line-height);
   .rem(line-height, @base-line-height * @coef);
-  
-  // margin
-  .flow(margin, @font-size, @base-line-height, @margin, @head);
 }
 
 // Flow margin
