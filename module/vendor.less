@@ -41,6 +41,7 @@
 // column-count(@value)
 // column-gap(@value)
 // display(@value)
+// filter(@value)
 // hyphens(@value)
 // hyphenate-character(@value)
 // hyphenate-limit-chars(@value)
@@ -83,6 +84,7 @@ when not (@property = animation)
  and not (@property = column-count)
  and not (@property = column-gap)
  and not (@property = display)
+ and not (@property = filter)
  and not (@property = hyphens)
  and not (@property = hyphenate-character)
  and not (@property = hyphenate-limit-chars)
@@ -289,6 +291,13 @@ when not (@property = animation)
   display: inline-block;
   *display: inline;
   *zoom: 1;
+}
+
+// !Filter
+.filter(@value) { .vendor(filter, @value) }
+.vendor(filter, @value) {
+  -webkit-filter: @value;
+          filter: @value;
 }
 
 // !Hyphens
