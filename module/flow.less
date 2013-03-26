@@ -41,6 +41,13 @@
 @flow-both:   both;
 
 @flow-line-height: @cfg-font-size * @cfg-line-height;
+.flow(line-height-unit, @font-size) when (isem(@font-size)) {
+  @flow-line-height: round(1em * @cfg-line-height, @cfg-decimal-em);
+}
+.flow(line-height-unit, @font-size) when not (isem(@font-size)) {
+  @flow-line-height: round(@flow-line-height, @cfg-decimal-px);
+}
+.flow(line-height-unit);
 
 // !Config
 
@@ -51,14 +58,19 @@
   @margin:           @cfg-font-flow,
   @head:             false
 ) when not (iskeyword(@font-size)) {
-  // font-size
-  .flow(font-size, @font-size);
-
-  // line-height
-  .flow(line-height, @font-size, @base-line-height);
+  // font-size & line-height
+  .flow(inline, @font-size, @base-line-height);
   
   // margin
   .flow(margin, @font-size, @base-line-height, @margin, @head);
+}
+
+.flow(inline,
+  @font-size:        @cfg-font-size,
+  @base-line-height: @flow-line-height
+) {
+  .flow(font-size, @font-size);
+  .flow(line-height, @font-size, @base-line-height);
 }
 
 // Font-size
@@ -92,16 +104,16 @@
 }
 
 // Flow margin
-.flow(margin, @font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-top) {
+.flow(margin, @font-size: @cfg-font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-top) {
   .flow(margin-css, @font-size, @base-line-height, 0);
 }
-.flow(margin, @font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-bottom) {
+.flow(margin, @font-size: @cfg-font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-bottom) {
   .flow(margin-css, @font-size, 0, @base-line-height);
 }
-.flow(margin, @font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-both) and (@head = true) {
+.flow(margin, @font-size: @cfg-font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-both) and (@head = true) {
   .flow(margin-css, @font-size, @base-line-height * 2, @base-line-height);
 }
-.flow(margin, @font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-middle), (@margin = @flow-both) and not (@head = true) {
+.flow(margin, @font-size: @cfg-font-size, @base-line-height: @flow-line-height, @margin: @cfg-font-flow, @head: false) when (@margin = @flow-middle), (@margin = @flow-both) and not (@head = true) {
   .flow(margin-css, @font-size, @base-line-height, @base-line-height);
 }
 
