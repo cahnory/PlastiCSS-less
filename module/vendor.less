@@ -13,52 +13,13 @@
 //
 // The quick one:
 // .property(...)
-//
-//
-// animation
-// background-size
-// border             -image(@value)
-// border-top         -image(@value)
-// border-right       -image(@value)
-// border-bottom      -image(@value)
-// border-left        -image(@value)
-// border-corner      -image(@value)
-// border-top-left    -image(@value)
-// border-top-right   -image(@value)
-// border-bottom-left -image(@value)
-// border-bottom-right-image(@value)
-// border-radius(@value)
-// border-top         -radius(@value)
-// border-right       -radius(@value)
-// border-bottom      -radius(@value)
-// border-left        -radius(@value)
-// border-top-left    -radius(@value)
-// border-top-right   -radius(@value)
-// border-bottom-left -radius(@value)
-// border-bottom-right-radius(@value)
-// box-shadow(@value)
-// box-sizing(@value)
-// column-count(@value)
-// column-gap(@value)
-// display(@value)
-// filter(@value)
-// hyphens(@value)
-// hyphenate-character(@value)
-// hyphenate-limit-chars(@value)
-// hyphenate-limit-last(@value)
-// hyphenate-limit-lines(@value)
-// hyphenate-limit-zone(@value)
-// linear-gradient([@direction,] @from, @to)
-// min-height(@value)
-// opacity(@value)
-// tab-size(@value)
-// transform(@value)
-// transition(@value)
-//
 
 // !unknown or removed property
 .vendor(@property, @value)
 when not (@property = animation)
+ and not (@property = align-content)
+ and not (@property = align-items)
+ and not (@property = align-self)
  and not (@property = background-size)
  and not (@property = border-image)
  and not (@property = border-top-image)
@@ -84,6 +45,13 @@ when not (@property = animation)
  and not (@property = column-count)
  and not (@property = column-gap)
  and not (@property = display)
+ and not (@property = flex)
+ and not (@property = flex-basis)
+ and not (@property = flex-direction)
+ and not (@property = flex-flow)
+ and not (@property = flex-grow)
+ and not (@property = flex-shrink)
+ and not (@property = flex-wrap)
  and not (@property = filter)
  and not (@property = hyphens)
  and not (@property = hyphenate-character)
@@ -91,13 +59,36 @@ when not (@property = animation)
  and not (@property = hyphenate-limit-last)
  and not (@property = hyphenate-limit-lines)
  and not (@property = hyphenate-limit-zone)
+ and not (@property = justify-content)
  and not (@property = linear-gradient)
  and not (@property = min-height)
  and not (@property = opacity)
+ and not (@property = order)
  and not (@property = tab-size)
  and not (@property = transform)
  and not (@property = transition) {
   .PlastiCSS(print, '@{property}: @{value}');
+}
+
+// !Align-content
+.align-content(@value) { .vendor(align-content, @value) }
+.vendor(align-content, @value) {
+  -webkit-align-content: @value;
+          align-content: @value;
+}
+
+// !Align-items
+.align-items(@value) { .vendor(align-items, @value) }
+.vendor(align-items, @value) {
+  -webkit-align-items: @value;
+          align-items: @value;
+}
+
+// !Align-self
+.align-self(@value) { .vendor(align-self, @value) }
+.vendor(align-self, @value) {
+  -webkit-align-self: @value;
+          align-self: @value;
 }
 
 // !animation
@@ -292,6 +283,80 @@ when not (@property = animation)
   *display: inline;
   *zoom: 1;
 }
+.vendor(display, flex) {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+// !Flex
+.flex(@value) { .vendor(flex, @value) }
+.vendor(flex, @value) {
+  -moz-box-flex: @value;
+   -webkit-flex: @value;
+      -moz-flex: @value;
+       -ms-flex: @value;
+           flex: @value;
+}
+
+// !Flex-basis
+.flex-basis(@value) { .vendor(flex-basis, @value) }
+.vendor(flex-basis, @value) {
+  -webkit-flex-basis: @value;
+          flex-basis: @value;
+}
+
+// !Flex-direction
+.flex-direction(@value) { .vendor(flex-direction, @value) }
+.vendor(flex-direction, @value) when not (@value = column) and not (@value = row) {
+  -webkit-flex-direction: @value;
+      -ms-flex-direction: @value;
+          flex-direction: @value;
+}
+.vendor(flex-direction, column) {
+      -webkit-box-orient: vertical;
+         -moz-box-orient: vertical;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.vendor(flex-direction, row) {
+      -webkit-box-orient: horizontal;
+         -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+// !Flex-flow
+.flex-flow(@value) { .vendor(flex-flow, @value) }
+.vendor(flex-flow, @value) {
+  -webkit-flex-flow: @value;
+          flex-flow: @value;
+}
+
+// !Flex-grow
+.flex-grow(@value) { .vendor(flex-grow, @value) }
+.vendor(flex-grow, @value) {
+  -webkit-flex-grow: @value;
+          flex-grow: @value;
+}
+
+// !Flex-shrink
+.flex-shrink(@value) { .vendor(flex-shrink, @value) }
+.vendor(flex-shrink, @value) {
+  -webkit-flex-shrink: @value;
+          flex-shrink: @value;
+}
+
+// !Flex-wrap
+.flex-wrap(@value) { .vendor(flex-wrap, @value) }
+.vendor(flex-wrap, @value) {
+  -webkit-flex-wrap: @value;
+          flex-wrap: @value;
+}
 
 // !Filter
 .filter(@value) { .vendor(filter, @value) }
@@ -354,6 +419,13 @@ when not (@property = animation)
           hyphenate-limit-zone: @value;
 }
 
+// !Justify-content
+.justify-content(@value) { .vendor(justify-content, @value) }
+.vendor(justify-content, @value) {
+  -webkit-justify-content: @value;
+          justify-content: @value;
+}
+
 // !linear-gradient
 .linear-gradient(@from, @to) { .vendor(linear-gradient, @from, @to) }
 .linear-gradient(@direction, @from, @to) { .vendor(linear-gradient, @direction, @from, @to) }
@@ -400,6 +472,8 @@ when not (@property = animation)
   min-height: @value;
      _height: @value;
 }
+
+// !Opacity
 .opacity(@value) { .vendor(opacity, @value) }
 .vendor(opacity, @value) {
   opacity: @value;
@@ -408,6 +482,15 @@ when not (@property = animation)
 .vendor(opacity, percent, @value) {
   -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@{value})';
   filter: ~'alpha(opacity=@{value})';
+}
+
+// !Order
+.order(@value) { .vendor(order, @value) }
+.vendor(order, @value) {
+  -ms-flex-order: @value;
+   -webkit-order: @value;
+      -moz-order: @value;
+           order: @value;
 }
 
 // !tab-size
