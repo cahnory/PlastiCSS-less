@@ -3,10 +3,9 @@
 // ===========================================
 //
 @triangle-cfg-width: .5em;
-@triangle-cfg-color: #FFF;
 @triangle-cfg-dir: bottom;
 
-.triangle(@dir: @triangle-cfg-dir, @width: @triangle-cfg-width, @color: @triangle-cfg-color) {
+.triangle(@dir: @triangle-cfg-dir, @width: @triangle-cfg-width, @color: ~'') {
   .triangle(private, @dir, @width, @color);
 }
 .triangle(private, @_, @width, ...) {
@@ -14,15 +13,35 @@
   height: 0;
   width: 0;
 }
-.triangle(private, bottom, @width: @triangle-cfg-width, @color: @triangle-cfg-color) {
+
+// Pointing bottom
+.triangle(private, bottom, @width, @color) when not (@color = ~'') {
   border-top-color: @color;
 }
-.triangle(private, left,   @width: @triangle-cfg-width, @color: @triangle-cfg-color) {
+.triangle(private, bottom, @width, @color) when (@color = ~'') {
+  border-top: @width solid;
+}
+
+// Pointing left
+.triangle(private, left,   @width, @color) when not (@color = ~'') {
   border-right-color: @color;
 }
-.triangle(private, right,  @width: @triangle-cfg-width, @color: @triangle-cfg-color) {
+.triangle(private, left,   @width, @color) when (@color = ~'') {
+  border-right: @width solid;
+}
+
+// Pointing right
+.triangle(private, right,  @width, @color) when not (@color = ~'') {
   border-left-color: @color;
 }
-.triangle(private, top,    @width: @triangle-cfg-width, @color: @triangle-cfg-color) {
+.triangle(private, right,  @width, @color) when (@color = ~'') {
+  border-left: @width solid;
+}
+
+// Pointing top
+.triangle(private, top,    @width, @color) when not (@color = ~'') {
   border-bottom-color: @color;
+}
+.triangle(private, top,    @width, @color) when (@color = ~'') {
+  border-bottom: @width solid;
 }
