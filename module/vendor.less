@@ -402,10 +402,12 @@ when not (@property = animation)
 }
 .opacity(@value) { .vendor(opacity, @value) }
 .vendor(opacity, @value) {
-  @percent: @value * 100;
   opacity: @value;
-  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@{percent})';
-  filter: ~'alpha(opacity=@{percent})';
+  .vendor(opacity, percent, @value * 100);
+}
+.vendor(opacity, percent, @value) {
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@{value})';
+  filter: ~'alpha(opacity=@{value})';
 }
 
 // !tab-size

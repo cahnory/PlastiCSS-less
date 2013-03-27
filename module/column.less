@@ -30,10 +30,7 @@
   @jump:   @column-cfg-jump
 ) when not (iskeyword(@size)) {
   // wrapper
-  @wrapper: ~'@{set}';
-  &@{wrapper} {
-    .clear();
-  }
+  .column(column-set, ~'@{set}');
   
   // column
   width: round(((100% - @margin * (@size - 1)) / @size), @cfg-decimal-percent);
@@ -44,6 +41,13 @@
   .column(span, @size, @margin, @span);
   .column(jump, @size, @margin, @jump, @cfg-direction);
   .column(break, @size, @break, @span, @jump, @cfg-direction);
+}
+
+// Column set
+.column(column-set, @selector) {
+  &@{selector} {
+    .clear();
+  }
 }
 
 // repartition
@@ -91,10 +95,9 @@
   .column(span, @size, @margin, @index - 1, @span);
 }
 .column(span, @size, @margin, @index, @span) {
-  @innerWidth: (100% - @margin * (@size - 1)) / @size;
-  @width:  round(@innerWidth * @index + @margin * (@index - 1), @cfg-decimal-percent);
-  
-  &@{span}@{index} { width: @width }
+  &@{span}@{index} {
+    width: round(((100% - @margin * (@size - 1)) / @size) * @index + @margin * (@index - 1), @cfg-decimal-percent);
+  }
 }
 
 // !Jump
@@ -105,30 +108,28 @@
   .column(jump, @size, @margin, @index - 1, @jump, @direction);
 }
 .column(jump, @size, @margin, @index, @jump, @direction) when (@direction = both) {
-  @innerWidth: (100% - @margin * (@size - 1)) / @size;
-  @realMargin: round(@innerWidth * @index + @margin * @index, @cfg-decimal-percent);
-
-  [dir="ltr"] &@{jump}@{index} { margin-left: @realMargin }
-  [dir="rtl"] &@{jump}@{index} { margin-right: @realMargin }
+  [dir="ltr"] &@{jump}@{index} {
+    margin-left: round(((100% - @margin * (@size - 1)) / @size) * @index + @margin * @index, @cfg-decimal-percent);
+  }
+  [dir="rtl"] &@{jump}@{index} {
+    margin-right: round(((100% - @margin * (@size - 1)) / @size) * @index + @margin * @index, @cfg-decimal-percent);
+  }
 }
 .column(jump, @size, @margin, @index, @jump, @direction) when (@direction = ltr) {
-  @innerWidth: (100% - @margin * (@size - 1)) / @size;
-  @realMargin: round(@innerWidth * @index + @margin * @index, @cfg-decimal-percent);
-
-  &@{jump}@{index} { margin-left: @realMargin }
+  &@{jump}@{index} {
+    margin-left: round(((100% - @margin * (@size - 1)) / @size) * @index + @margin * @index, @cfg-decimal-percent);
+  }
 }
 .column(jump, @size, @margin, @index, @jump, @direction) when (@direction = rtl) {
-  @innerWidth: (100% - @margin * (@size - 1)) / @size;
-  @realMargin: round(@innerWidth * @index + @margin * @index, @cfg-decimal-percent);
-
-  &@{jump}@{index} { margin-right: @realMargin }
+  &@{jump}@{index} {
+    margin-right: round(((100% - @margin * (@size - 1)) / @size) * @index + @margin * @index, @cfg-decimal-percent);
+  }
 }
 
 
 // !Break point
 .column(break, @size, @break, @span, @jump, @direction) {
-  @query: ~'(max-width: @{break})';
-  @media @query {
+  @media (max-width: @break) {
     & {
       margin-left: 0;
       margin-right: 0;

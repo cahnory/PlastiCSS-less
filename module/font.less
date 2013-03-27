@@ -72,12 +72,12 @@
   }
 }
 .font-face(@package) {
-  @family: '@{package}-family';
-  @file:   '@{package}-file';
-  @idSvg:  '@{package}-idSvg';
-  @weight: '@{package}-weight';
-  @style:  '@{package}-style';
-  @param:  '@{package}-param';
-
-  .font-face(@@family, @@file, @@idSvg, @@weight, @@style, @@param);
+  .font-face(
+    '@{@{package}-family}',
+    '@{@{package}-file}',
+    '@{@{package}-idSvg}',
+    '@{@{package}-weight}',
+    '@{@{package}-style}',
+    '@{@{package}-param}'
+  );
 }

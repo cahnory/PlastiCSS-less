@@ -13,7 +13,5 @@
   -thanks-to: "PlastiCSS by François Germain - https://github.com/cahnory/PlastiCSS/";
 }
 .PlastiCSS(credit, @name) {
-  @creditVar: ~'@{name}-credits';
-  @credit: @@creditVar;
-  -thanks-to: ~"'@{credit}'"
+  -thanks-to: ~"'@{@{name}-credits}'"
 }

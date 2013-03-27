@@ -40,6 +40,7 @@
 @flow-middle: middle;
 @flow-both:   both;
 
+// Calculated and rounded 'base' line-height
 @flow-line-height: @cfg-font-size * @cfg-line-height;
 .flow(line-height-unit, @font-size) when (isem(@font-size)) {
   @flow-line-height: round(1em * @cfg-line-height, @cfg-decimal-em);
@@ -48,8 +49,6 @@
   @flow-line-height: round(@flow-line-height, @cfg-decimal-px);
 }
 .flow(line-height-unit);
-
-// !Config
 
 // !Flow
 .flow(
@@ -90,17 +89,13 @@
   @font-size:        @cfg-font-size,
   @base-line-height: @flow-line-height
 ) when (isem(@font-size)) {
-  @line-height: @base-line-height / @font-size;
-  @coef: ceil(1 / @line-height);
-  line-height: round(@line-height * @coef, @cfg-decimal-em);
+  line-height: round(@base-line-height / @font-size * ceil(1 / (@base-line-height / @font-size)), @cfg-decimal-em);
 }
 .flow(line-height,
   @font-size:        @cfg-font-size,
   @base-line-height: @flow-line-height
 ) when not (isem(@font-size)) {
-  @line-height: @base-line-height / @font-size;
-  @coef: ceil(1 / @line-height);
-  .rem(line-height, @base-line-height * @coef);
+  .rem(line-height, @base-line-height * ceil(1 / (@base-line-height / @font-size)));
 }
 
 // Flow margin
@@ -166,54 +161,45 @@
 
 // !flow-ease: linear
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, linear, @head) {
-  @font-size: @c * @t/@d + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * @t/@d + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeInQuad
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInQuad, @head) {
-  @font-size: @c * (@t/@d) * (@t/@d) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * (@t/@d) * (@t/@d) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeOutQuad
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutQuad, @head) {
-  @font-size: -@c * (@t/@d) * (@t/@d - 2) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(-@c * (@t/@d) * (@t/@d - 2) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeInCubic
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInCubic, @head) {
-  @font-size: @c * (@t/@d) * (@t/@d) * (@t/@d) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * (@t/@d) * (@t/@d) * (@t/@d) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeOutCubic
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutCubic, @head) {
-  @font-size: @c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) + 1) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) + 1) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeInQuart
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInQuart, @head) {
-  @font-size: @c * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeOutQuart
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutQuart, @head) {
-  @font-size: -@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) - 1) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(-@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) - 1) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeInQuint
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeInQuint, @head) {
-  @font-size: @c * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) * (@t/@d) + @b, @line-height, @margin, @head);
 }
 
 // !flow-ease: easeOutQuint
 .flow-ease(_private, @line-height, @margin, @b, @c, @t, @d, easeOutQuint, @head) {
-  @font-size: @c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) + 1) + @b;
-  .flow(@font-size, @line-height, @margin, @head);
+  .flow(@c * ((@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) * (@t/@d - 1) + 1) + @b, @line-height, @margin, @head);
 }
