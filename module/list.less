@@ -1,0 +1,89 @@
+// !list.less
+@list-cfg-flat-join:    ', ';
+@list-cfg-flat-suffix:  '.';
+@list-cfg-flat-prefix:  '';
+@list-cfg-triangle-dir: direction;
+
+.list(cfg) when (@cfg-direction = rtl) {
+  @list-cfg-flat-join: ' ,';
+}
+.list(cfg) when (@cfg-direction = both) {
+  @list-cfg-flat-join: ' — ';
+}
+
+
+// !Flat list
+.list(flat, ...) {
+  list-style: none;
+  padding: 0;
+  > li {
+    display: inline;
+  }
+}
+// Join
+.list(flat,
+  @join:    @list-cfg-flat-join,
+  ...
+) when not (@join = '') {
+  > li {
+    &:after {
+      content: @join;
+    }
+  }
+}
+// Suffix
+.list(flat,
+  @join:    @list-cfg-flat-join,
+  @suffix:  @list-cfg-flat-suffix,
+  ...
+) when not (@join = @suffix) and not (@suffix = '') {
+  > li:last-child {
+    &:after {
+      content: @suffix;
+    }
+  }
+}
+// Prefix
+.list(flat,
+  @join:    @list-cfg-flat-join,
+  @suffix:  @list-cfg-flat-suffix,
+  @prefix:  @list-cfg-flat-prefix
+) when not (@prefix = '') {
+  > li:first-child {
+    display: inline;
+    &:before {
+      content: @prefix;
+    }
+  }
+}
+
+
+// !Triangle style
+.list(triangle, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') when not (@dir = direction) and not (@dir = backward) {
+  .list(triangle-construct, @dir, @width, @color);
+}
+.list(triangle, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') when (@dir = direction) and (@cfg-direction = ltr) {
+  .list(triangle-construct, right, @width, @color);
+}
+.list(triangle, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') when (@dir = direction) and (@cfg-direction = rtl) {
+  .list(triangle-construct, left, @width, @color);
+}
+.list(triangle, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') when (@dir = backward) and (@cfg-direction = ltr) {
+  .list(triangle-construct, left, @width, @color);
+}
+.list(triangle, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') when (@dir = backward) and (@cfg-direction = rtl) {
+  .list(triangle-construct, right, @width, @color);
+}
+.list(triangle, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') when (@dir = backward) and (@cfg-direction = both) {
+  .list(triangle-construct, right, @width, @color);
+}
+
+.list(triangle-construct, @dir: @list-cfg-triangle-dir, @width: @triangle-cfg-width, @color: ~'') {
+  list-style: none;
+  &:before {
+    content: @utf-nbsp;
+    vertical-align: middle;
+    .vendor(display, inline-block);
+    .triangle(@dir, @width, @color);
+  }
+}

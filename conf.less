@@ -7,48 +7,54 @@
 
 pickAndEdit {
   // !Assets
-  @cfg-dir-font:        '../font/';
-  @cfg-dir-img:         '../img/';
+  @cfg-dir-font:                '../font/';
+  @cfg-dir-img:                 '../img/';
 
   // !Reading
-  @cfg-font-family:     @font-sans-serif;
-  @cfg-font-size:       1.6em;
-  @cfg-line-height:     1.5;
-  @cfg-font-limit:      3;
-  @cfg-font-flow:       both;
-  @cfg-font-ease:       linear;
-  @cfg-direction:       ltr;
+  @cfg-font-family:             @font-sans-serif;
+  @cfg-font-size:               1.6em;
+  @cfg-line-height:             1.5;
+  @cfg-font-limit:              3;
+  @cfg-font-flow:               both;
+  @cfg-font-ease:               linear;
+  @cfg-direction:               ltr;
 
-  @cfg-rem-size:        10px;
+  @cfg-rem-size:                10px;
 
 
   // !Breakpoints
-  @cfg-media-large:     1024px;
-  @cfg-media-medium:    640px;
-  @cfg-media-small:     0;
+  @cfg-media-large:             1024px;
+  @cfg-media-medium:            640px;
+  @cfg-media-small:             0;
 
   // !Numbers
-  @cfg-decimal:         4;
-  @cfg-decimal-em:      @cfg-decimal;
-  @cfg-decimal-percent: @cfg-decimal;
-  @cfg-decimal-px:      0;
-  @cfg-decimal-rem:     @cfg-decimal;
+  @cfg-decimal:                 4;
+  @cfg-decimal-em:              @cfg-decimal;
+  @cfg-decimal-percent:         @cfg-decimal;
+  @cfg-decimal-px:              0;
+  @cfg-decimal-rem:             @cfg-decimal;
 
   // !Modules default values
   // ******************************************************** //
   // !column
-  @column-cfg-margin:   2%;
-  @column-cfg-set:      '-set';
-  @column-cfg-span:     '.span-';
-  @column-cfg-jump:     '.jump-';
-  @column-cfg-break:    @cfg-media-medium - 1;
+  @column-cfg-margin:           2%;
+  @column-cfg-set:              '-set';
+  @column-cfg-span:             '.span-';
+  @column-cfg-jump:             '.jump-';
+  @column-cfg-break:            @cfg-media-medium - 1;
 
   // !icon
-  @icon-cfg-size:       1em;
-  @icon-cfg-position:   before;
-  @icon-cfg-font:       none;
+  @icon-cfg-size:               1em;
+  @icon-cfg-position:           before;
+  @icon-cfg-font:               none;
+
+  // !list
+  @list-cfg-flat-join:          ', ';
+  @list-cfg-flat-suffix:        '.';
+  @list-cfg-flat-prefix:        '';
+  @list-cfg-triangle-dir:       direction;
 
   // !triangle
-  @triangle-cfg-width:  .5em;
-  @triangle-cfg-dir:    bottom;
+  @triangle-cfg-width:          .5em;
+  @triangle-cfg-dir:            bottom;
 }
