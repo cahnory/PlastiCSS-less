@@ -52,3 +52,7 @@
 @cfg-decimal-percent: @cfg-decimal;
 @cfg-decimal-px:      0;
 @cfg-decimal-rem:     @cfg-decimal;
+
+.cfg(direction) when (@cfg-direction = rtl) {
+  direction: rtl;
+}
